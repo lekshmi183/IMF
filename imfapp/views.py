@@ -317,7 +317,25 @@ def appointment_cancel(request,id):
      appid.cancel_status=1
      appid.save()
      return redirect('viewapp')
-       
+def refund(request,id,amount):
+    am=int(amount)
+    print(am)
+    appid = get_object_or_404(Appointment,id = id)
+    if request.method=='POST': 
+        form1=refund_form(request.POST)
+        print(form1)
+        if form1.is_valid():
+            a=form1.save(commit=False)
+            a.amount=am
+            a.app_id=appid
+            a.save()
+            appid.refund_status=1
+            appid.save()
+            return redirect('viewappointment')
+
+    else:
+        form1=refund_form()
+    return render(request,'refund.html',{'form': form1})        
 def amb_reg(request):
     id=request.session.get('hosp_id')
     hid=get_object_or_404(Login,id=id)

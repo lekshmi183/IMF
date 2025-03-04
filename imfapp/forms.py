@@ -91,6 +91,11 @@ class payment_form(forms.ModelForm):
             'exp_date':forms.TextInput(attrs={'class':'form-control','type':'date'}),
             
         }       
+
+class refund_form(forms.ModelForm):
+     class Meta:
+        model=Payment
+        fields=['card_name','card_number','cvv','exp_date']
 class amb_form(forms.ModelForm):
     category_choices=(        
         ('basic life support','Basic Life Support'),('advanced life support','Advanced Life Support'),('critical care support','Critical Care Support')
