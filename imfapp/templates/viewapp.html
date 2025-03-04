@@ -28,6 +28,13 @@
             {% else %}
             <td><a href="{% url 'appointment_cancel' appointment.id %}">CANCEL</a></td>
             {% endif %}
+
+            <td>
+                {% if appointment.refund_status == 1 %}
+                    Refunded
+                
+                {% endif %}
+            </td>
         </tr>
         {% empty %}
         <tr>

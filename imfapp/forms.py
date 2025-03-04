@@ -91,3 +91,15 @@ class payment_form(forms.ModelForm):
             'exp_date':forms.TextInput(attrs={'class':'form-control','type':'date'}),
             
         }       
+
+class refund_form(forms.ModelForm):
+    class Meta:
+        model=Payment
+        fields=['card_name','card_number','cvv','exp_date']
+        widgets={
+            'card_name':forms.TextInput(attrs={'class':'form-control'}),
+            'card_number':forms.TextInput(attrs={'class':'form-control'}),
+            'cvv':forms.TextInput(attrs={'class':'form-control'}),
+            'exp_date':forms.TextInput(attrs={'class':'form-control','type':'date'}),
+            
+        }       

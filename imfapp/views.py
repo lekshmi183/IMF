@@ -237,12 +237,14 @@ def appointment(request,login_id,amount):
     
 def viewappointment(request):
     doctor_id = request.session.get('doc_id')
-    doctor = get_object_or_404(Login, id=doctor_id)   
+    doctor = get_object_or_404(Login, id=doctor_id) 
+    fee=get_object_or_404(DoctorRegister, login_id=doctor_id)
+    print(fee)
     appointments = Appointment.objects.filter(login_id=doctor)
     
     for appointment in appointments:
         appointment.patient_register = PatientRegister.objects.get(login_id=appointment.patient_id)  
-    return render(request, 'viewappointment.html', {'appointments': appointments})
+    return render(request, 'viewappointment.html', {'appointments': appointments,'fee':fee})
 
 def viewapp(request):
     patient_id = request.session.get('patient_id')
@@ -315,6 +317,24 @@ def appointment_cancel(request,id):
      appid.save()
      return redirect('viewapp')
    
-    
+def refund(request,id,amount):
+    am=int(amount)
+    print(am)
+    appid = get_object_or_404(Appointment,id = id)
+    if request.method=='POST': 
+        form1=refund_form(request.POST)
+        print(form1)
+        if form1.is_valid():
+            a=form1.save(commit=False)
+            a.amount=am
+            a.app_id=appid
+            a.save()
+            appid.refund_status=1
+            appid.save()
+            return redirect('viewappointment')
+
+    else:
+        form1=refund_form()
+    return render(request,'refund.html',{'form': form1})    
 
 

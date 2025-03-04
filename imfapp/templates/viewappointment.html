@@ -1,6 +1,5 @@
-<!-- viewappointment.html -->
 <h2>View Appointments:</h2>
-    <table border="1" class="table table-stripped">
+<table border="1" class="table table-striped">
     <thead>
         <tr>
             <th>Patient</th>
@@ -8,6 +7,9 @@
             <th>Age</th>
             <th>Date</th>
             <th>Time</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -18,12 +20,21 @@
             <td>{{ appointment.patient_register.age }}</td>  <!-- Access age -->
             <td>{{ appointment.date }}</td>  <!-- Access appointment date -->
             <td>{{ appointment.time }}</td>  <!-- Access appointment time -->
+                {% if appointment.cancel_status == 1 %}
+                    <td>Cancelled</td>
+                {% else %}
+                    <td>Scheduled</td>
+                {% endif %}
+                {% if appointment.refund_status == 1 %}
+                    <td>Refunded</td>
+                {% else %}
+                <td><a href="{% url 'refund' appointment.id fee.consultation_fee %}">REFUND</a></td>
+                {% endif %}
         </tr>
         {% empty %}
         <tr>
-            <td colspan="5">No appointments scheduled.</td>
+            <td colspan="7">No appointments scheduled.</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-

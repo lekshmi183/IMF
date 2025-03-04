@@ -32,6 +32,7 @@ urlpatterns = [
      path('consultation_fee/<int:id>/', views.consultation_fee, name='consultation_fee'), 
      path('payment/<int:id>/<int:amount>/', views.payment, name='payment'),
      path('appointment_cancel/<int:id>/', views.appointment_cancel, name='appointment_cancel'), 
+     path('refund/<int:id>/<int:amount>/', views.refund, name='refund'),
 
 
 
