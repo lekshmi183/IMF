@@ -42,6 +42,7 @@ class Appointment(models.Model):
     patient_id=models.ForeignKey(Login,on_delete=models.CASCADE,related_name='patient_login')
     login_id=models.ForeignKey(Login,on_delete=models.CASCADE,related_name='doctor_login')
     cancel_status=models.IntegerField(default=0)
+    refund_status=models.IntegerField(default=0)
 
 class Payment(models.Model):
     card_name=models.CharField(max_length=255)

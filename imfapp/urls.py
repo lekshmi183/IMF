@@ -38,6 +38,7 @@ urlpatterns = [
      path('ambprof',views.ambprof,name='ambprof'),
      path('ambprofedit/<int:id>/',views.ambprofedit,name='ambprofedit'),
      path('delete_ambulance/<int:id>/', views.delete_ambulance, name='delete_ambulance'),
+     path('refund/<int:id>/<int:amount>/', views.refund, name='refund'),
 
 
 

@@ -240,12 +240,14 @@ def appointment(request,login_id,amount):
     
 def viewappointment(request):
     doctor_id = request.session.get('doc_id')
-    doctor = get_object_or_404(Login, id=doctor_id)   
+    doctor = get_object_or_404(Login, id=doctor_id) 
+    fee=get_object_or_404(DoctorRegister, login_id=doctor_id)
+    print(fee)
     appointments = Appointment.objects.filter(login_id=doctor)
     
     for appointment in appointments:
         appointment.patient_register = PatientRegister.objects.get(login_id=appointment.patient_id)  
-    return render(request, 'viewappointment.html', {'appointments': appointments})
+    return render(request, 'viewappointment.html', {'appointments': appointments,'fee':fee})
 
 def viewapp(request):
     patient_id = request.session.get('patient_id')
