@@ -52,6 +52,9 @@ def loginprocess(request):
                     elif user.usertype==3:
                         request.session['patient_id']=user.id
                         return redirect('patienthome')
+                    elif user.usertype==4:
+                        request.session['amb_id']=user.id
+                        return redirect('ambhome')
                 else:
                     messages.error(request,'invalid password')    
             except Login.DoesNotExist:
@@ -270,11 +273,9 @@ def editviewapp(request, id):
 
 
 def delete_appointment(request, id):
-    patient_id = request.session.get('patient_id')
-    login = get_object_or_404(Login, id=patient_id)
-    appointment = get_object_or_404(Appointment, id=id, patient_id=login)
+    appointment = get_object_or_404(Appointment, id=id)
     appointment.delete()
-    return redirect('viewappointment') 
+    return redirect('viewapp') 
 
 def consultation_fee(request,id):
     doctor=get_object_or_404(DoctorRegister,id=id)
@@ -314,7 +315,78 @@ def appointment_cancel(request,id):
      appid.cancel_status=1
      appid.save()
      return redirect('viewapp')
-   
+       
+def amb_reg(request):
+    id=request.session.get('hosp_id')
+    hid=get_object_or_404(Login,id=id)
+    if request.method == 'POST':
+        form = amb_form(request.POST)
+        login = login_form(request.POST)
+        
+        if form.is_valid() and login.is_valid():
+            try:
+                a = login.save(commit=False)
+                a.usertype = 4
+                a.save()
+                
+                b = form.save(commit=False)
+                b.amb_login_id = a
+                b.hosp_id=hid
+                b.save()
+                
+                messages.success(request, "Form successfully submitted")
+                return redirect('hosphome')
+            except Exception as e:
+                messages.error(request, f"Error occurred: {str(e)}")
+        else:
+            messages.error(request, "There were errors in the form. Please check and try again.")
+    else:
+        form = amb_form()
+        login = login_form()
     
+    return render(request, 'ambreg.html', {'form': form, 'login': login})
 
+def ambhome(request):
+    return render(request,'ambhome.html')
 
+def view_amb(request):
+    id=request.session.get('hosp_id')
+    hid=get_object_or_404(Login,id=id)
+    amb_id=AmbulanceRegister.objects.filter(hosp_id=hid)
+    return render(request,'viewamb.html',{'data':amb_id})
+
+def ambprof(request):
+   userid=request.session.get('amb_id')
+   login=get_object_or_404(Login,id=userid)
+   amb_data=get_object_or_404(AmbulanceRegister,amb_login_id=userid)
+   if request.method=='POST':
+        form1=amb_form(request.POST,instance=amb_data)
+        form2=login_form(request.POST,instance=login)
+        if form1.is_valid() and form2.is_valid():
+            form1.save()
+            form2.save()
+            return redirect('ambhome')
+   else:
+        form1=amb_form(instance=amb_data)
+        form2=login_form(instance=login)
+   return render(request,'ambprof.html',{'form':form1,'login':form2})
+
+def ambprofedit(request,id):
+   
+   amb_data=get_object_or_404(AmbulanceRegister,amb_login_id=id)
+   if request.method=='POST':
+        form1=amb_form(request.POST,instance=amb_data)
+        form2=amb_login_form(request.POST,instance=amb_data.amb_login_id)
+        if form1.is_valid() and form2.is_valid():
+            form1.save()
+            form2.save()
+            return redirect('view_amb')
+   else:
+        form1=amb_form(instance=amb_data)
+        form2=amb_login_form(instance=amb_data.amb_login_id)
+   return render(request,'ambprofedit.html',{'form':form1,'login':form2})
+    
+def delete_ambulance(request, id):
+    ambulance = get_object_or_404(AmbulanceRegister, id=id)
+    ambulance.delete()
+    return redirect('view_amb') 

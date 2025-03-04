@@ -1,0 +1,31 @@
+{% extends 'docheader.html' %}
+{% block content %}
+
+
+<center>
+    <table border="1" class="table table-stripped">
+        <tr>
+            <th>Vehicle Category</th>
+            <th>Vehicle Type</th>
+            <th>Vehicle Number</th>
+            <th>Driver Name</th>
+            <th>Driver Contact</th>
+            <th>Email</th>
+        </tr>
+        {% for a in data %}
+        <tr>
+        <td>{{a.vehicle_category}}</td>
+        <td>{{a.vehicle_type}}</td>
+        <td>{{a.vehicle_no}}</td>
+        <td>{{a.driver_name}}</td>
+        <td>{{a.driver_contact}}</td>
+        <td>{{a.amb_login_id.email}}</td>
+        <td>
+            <a href="{% url 'ambprofedit' a.amb_login_id.id %}">EDIT</a></td>
+        <td>
+            <a href="{% url 'delete_ambulance' a.id %}">DELETE</a></td>
+    </tr>
+    {% endfor %}
+    </table>
+    
+{% endblock %}

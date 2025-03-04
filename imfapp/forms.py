@@ -91,3 +91,26 @@ class payment_form(forms.ModelForm):
             'exp_date':forms.TextInput(attrs={'class':'form-control','type':'date'}),
             
         }       
+class amb_form(forms.ModelForm):
+    category_choices=(        
+        ('basic life support','Basic Life Support'),('advanced life support','Advanced Life Support'),('critical care support','Critical Care Support')
+    )
+    vehicle_category=forms.ChoiceField(choices=category_choices,widget=forms.Select())
+    type_choices=(        
+        ('type I(truck-based)','Type I(Truck-based)'),('type II(van-based)','Type II(Van-based)'),('type III(modular)','Type III(Modular)')
+    )
+    vehicle_type=forms.ChoiceField(choices=type_choices,widget=forms.Select())
+    class Meta:
+        model=AmbulanceRegister
+        fields=['vehicle_category','vehicle_type','vehicle_no','driver_name','driver_contact']
+        widget={
+            'vehicle_category':forms.Select(attrs={'class':'form-control'}),
+            'vehicle_type':forms.Select(attrs={'class':'form-control'}),
+            'vehicle_no':forms.TextInput(attrs={'class':'form-control'}),
+            'driver_name':forms.TextInput(attrs={'class':'form-control'}),
+            'driver_contact':forms.TextInput(attrs={'class':'form-control'})
+        }
+class amb_login_form(forms.ModelForm):
+    class Meta:
+        model=Login
+        fields=['email']

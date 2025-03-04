@@ -53,6 +53,14 @@ class Payment(models.Model):
     current_time = models.DateTimeField(auto_now_add=True)
     app_id=models.ForeignKey('Appointment',on_delete=models.CASCADE)
 
+class AmbulanceRegister(models.Model):
+   vehicle_category=models.CharField(max_length=255)
+   vehicle_type=models.CharField(max_length=255)
+   vehicle_no=models.CharField(max_length=255)
+   driver_name=models.CharField(max_length=255)
+   driver_contact=models.CharField(max_length=15)
+   hosp_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='hosp_loginid')
+   amb_login_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='amb_login_id')
 
 
 

@@ -32,6 +32,12 @@ urlpatterns = [
      path('consultation_fee/<int:id>/', views.consultation_fee, name='consultation_fee'), 
      path('payment/<int:id>/<int:amount>/', views.payment, name='payment'),
      path('appointment_cancel/<int:id>/', views.appointment_cancel, name='appointment_cancel'), 
+     path('amb_reg',views.amb_reg,name='amb_reg'),
+     path('ambhome',views.ambhome,name='ambhome'),
+     path('view_amb',views.view_amb,name='view_amb'),
+     path('ambprof',views.ambprof,name='ambprof'),
+     path('ambprofedit/<int:id>/',views.ambprofedit,name='ambprofedit'),
+     path('delete_ambulance/<int:id>/', views.delete_ambulance, name='delete_ambulance'),
 
 
 
