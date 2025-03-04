@@ -1,0 +1,804 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+   
+<!-- Mirrored from html.designingmedia.com/medtech/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2025 07:10:32 GMT -->
+<head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" href="{% static 'mainproj/medtech/pro.fontawesome.com/releases/v5.10.0/css/all.css' %}" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+      <link rel="stylesheet" href="{% static 'mainproj/medtech/assets/css/animate.css' %}">
+      <link rel="stylesheet" href="{% static 'mainproj/medtech/assets/bootstarp/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'mainproj/medtech/assets/css/super-classes.css' %}">
+      <link rel="stylesheet" href="{% static 'mainproj/medtech/assets/css/style.css' %}">
+      <link rel="stylesheet" href="{% static 'mainproj/medtech/assets/css/mobile.css' %}">
+      <title>Medtech</title>
+   </head>
+   <body>
+      <!-- top-bar-section-->
+      <div class="w-100 float-left top-bar-main-con text-white text-xl-left text-lg-left text-md-left text-center">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-6 col-md-6 col-12">
+                  <div class="top-bar-left-con ">
+                     <i class="fas fa-map-marker-alt"></i>
+                     <span>King Street Melbourne, 3000, Australia</span>
+                  </div>
+               </div>
+               <div class="col-lg-6 col-md-6 col-12 d-flex justify-content-xl-end justify-content-lg-end justify-content-md-end justify-content-center">
+                  <div class="top-bar-right-con d-flex">
+                     <span>Get Social:</span>
+                        <ul class="list-unstyled mb-0">
+                           <li class="float-left"><a href="https://www.facebook.com/" class="text-white"><i class="fab fa-facebook-square"></i></a></li>
+                           <li class="float-left"><a href="https://twitter.com/?lang=en" class="text-white"><i class="fab fa-twitter-square"></i></a></li>
+                           <li class="float-left"><a href="https://www.pinterest.com/" class="text-white"><i class="fab fa-pinterest-square"></i></a></li>
+                           <li class="float-left"><a href="https://www.youtube.com/" class="text-white"><i class="fab fa-youtube-square"></i></a></li>
+                        </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- top-bar-section-->
+      <!-- header-and-banner-section -->
+      <div class="w-100 float-left header-and-banner-con banner-overlay-img">
+         <div class="container">
+            <div class="overlay-img">
+               <!-- navbar-start -->
+               <nav class="navbar navbar-expand-lg navbar-light">
+                  <a class="navbar-brand" href="index.html"><img src="{% static 'mainproj/medtech/assets/image/logo-img.png' %}" alt="logo-img" class="img-fluid"></a>
+                  <button class="navbar-toggler p-0 collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  <span class="navbar-toggler-icon"></span>
+                  <span class="navbar-toggler-icon"></span>
+                  </button>                     
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                     <ul class="navbar-nav ml-auto mr-auto">
+                        <li class="nav-item active ">
+                           <a class="nav-link p-0 text-white" href="index.html">Home<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link p-0 text-white" href="{% url 'docprofedit' %}">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link p-0 text-white" href="{% url 'viewappointment' %}">View Appointments</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link p-0 text-white" href="team.html">Team </a>
+                        </li>
+                        <!-- <li class="nav-item dropdown pr-lg-0">
+                           <a class="nav-link dropdown-toggle p-0 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Doctor
+                           </a>
+                           <div class="dropdown-menu p-0" aria-labelledby="navbarDropdown">
+                             <a class="dropdown-item" href="{% url 'doc_reg' %}">Add Patient</a>
+                             <a class="dropdown-item" href="{% url 'view_doc' %}">View Patient</a>
+                             
+                           </div>
+                         </li> -->
+                         <li class="nav-item">
+                           <a class="nav-link p-0 text-white" href="contact.html"> Contact </a>
+                        </li>
+                     </ul>
+                     <a href="tel:+12345678" class="navbar-btn text-white">
+                     <i class="fas fa-phone-volume"></i>
+                     +1 234 56 78
+                     </a>
+                  </div>
+               </nav>
+               <!-- navbar-end -->
+               <!-- banner-start -->
+               <section>
+                  <div class="w-100 float-left banner-con text-xl-left text-lg-left text-center">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-lg-6 order-xl-0 order-lg-0 order-2">
+                              <div class="banner-left-con">
+                                 <figure class="mb-0 left-curve-img wow slideInLeft">
+                                    <img src="{% static 'mainproj/medtech/assets/image/small-left-curve-img.png' %}" alt="" class="img-fluid">
+                                 </figure>
+                                 <figure class="mb-0">
+                                    <img src="{% static 'mainproj/medtech/assets/image/banner-left-img.png' %}" alt="banner-left-img" class="img-fluid banner-left-img">
+                                 </figure>
+                                 <figure class="mb-0 right-curve-img wow slideInRight">
+                                    <img src="{% static 'mainproj/medtech/assets/image/small-right-curve-img.png' %}" alt="" class="img-fluid">
+                                 </figure>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <div class="banner-right-content text-white">
+                                 <h5>Healthy. Everyday.</h5>
+                                 <h1>We are Providing
+                                    Best and Affordable 
+                                    Healthcare
+                                 </h1>
+                                 <p class="text-white col-lg-10 col-md-9 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 ml-auto mr-auto pl-0 pr-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                 <a href="#contact-form" class="appointment-btn ">Make Appointment</a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </section>
+               <!-- banner-end -->
+            </div>
+         </div>
+      </div>
+      <!-- header-and-banner-section -->
+      <!-- feature-box -->
+      <section>
+         <div class="w-100 float-left feature-box-con text-center">
+            <div class="container">
+               <div class="row bg-white">
+                  <div class="col-lg-3 col-md-3 col-sm-6  pl-0 pr-0">
+                     <div class="feature-box-item ">
+                        <figure>
+                           <img src="{% static 'mainproj/medtech/assets/image/feature-box-icon1.png' %}" alt="feature-box-icon" class="img-fluid">
+                        </figure>
+                        <h5>Doctors</h5>
+                        <p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipi.</p>
+                     </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6 pl-0 pr-0">
+                     <div class="feature-box-item ">
+                        <figure>
+                           <img src="{% static 'mainproj/medtech/assets/image/feature-box-icon2.png' %}" alt="feature-box-icon" class="img-fluid">
+                        </figure>
+                        <h5>Hospitals</h5>
+                        <p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipi.</p>
+                     </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6 pl-0 pr-0">
+                     <div class="feature-box-item ">
+                        <figure>
+                           <img src="{% static 'mainproj/medtech/assets/image/feature-box-icon3.png' %}" alt="feature-box-icon" class="img-fluid">
+                        </figure>
+                        <h5>General Medicine</h5>
+                        <p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipi.</p>
+                     </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6 pl-0 pr-0">
+                     <div class="feature-box-item ">
+                        <figure>
+                           <img src="{% static 'mainproj/medtech/assets/image/feature-box-icon4.png' %}" alt="feature-box-icon" class="img-fluid">
+                        </figure>
+                        <h5>Hospice Care</h5>
+                        <p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipi.</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="row bg-white">
+                  <div class="col-lg-3 col-md-3 col-sm-6 pl-0 pr-0 border-bottom-0">
+                     <div class="feature-box-item">
+                        <figure>
+                           <img src="{% static 'mainproj/medtech/assets/image/feature-box-icon5.png' %}" alt="feature-box-icon" class="img-fluid">
+                        </figure>
+                        <h5>Rehab</h5>
+                        <p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipi.</p>
+                     </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6 pl-0 pr-0 border-bottom-0">
+                     <div class="feature-box-item">
+                        <figure>
+                           <img src="{% static 'mainproj/medtech/assets/image/feature-box-icon6.png' %}" alt="feature-box-icon" class="img-fluid">
+                        </figure>
+                        <h5>Dialysis Facilities</h5>
+                        <p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipi.</p>
+                     </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6 pl-0 pr-0 border-bottom-0">
+                     <div class="feature-box-item">
+                        <figure>
+                           <img src="{% static 'mainproj/medtech/assets/image/feature-box-icon7.png' %}" alt="feature-box-icon" class="img-fluid">
+                        </figure>
+                        <h5>Health Schedule</h5>
+                        <p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipi.</p>
+                     </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6 pl-0 pr-0 border-bottom-0 border-right-0">
+                     <div class="feature-box-item">
+                        <figure>
+                           <img src="{% static 'mainproj/medtech/assets/image/feature-box-icon8.png' %}" alt="feature-box-icon" class="img-fluid">
+                        </figure>
+                        <h5>Ambulance Call</h5>
+                        <p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipi.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- feature-box -->
+      <!-- quality-system-section -->
+      <section>
+         <div class="w-100 float-left quality-system-con">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-6 col-md-6 d-flex align-items-center">
+                     <div class="quality-system-left-con">
+                        <h2>Our Quality System is
+                           Ready to Help You!
+                        </h2>
+                        <p>Seram ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt.</p>
+                        <p>Aenean leo ligula, porttitor eu consequat vitae eleifend ac enim aliqu am lorem ante dapibus in viverra quis feugiata tellus.</p>
+                        <div class="quality-system-list">
+                           <ul class="list-unstyled">
+                              <li class="position-relative"><i class="fas fa-circle"></i>24 Hour Service</li>
+                              <li class="position-relative"><i class="fas fa-circle"></i>Emergency Cases</li>
+                              <li class="position-relative"><i class="fas fa-circle"></i>Expert Doctors</li>
+                           </ul>
+                        </div>
+                        <div class="quality-system-list">
+                           <ul class="list-unstyled">
+                              <li class="position-relative"><i class="fas fa-circle"></i>Update Covid-19</li>
+                              <li class="position-relative"><i class="fas fa-circle"></i>24/7 Help Center</li>
+                              <li class="position-relative"><i class="fas fa-circle"></i>Modern Clinic</li>
+                           </ul>
+                        </div>
+                        <a href="#contact-form" class="appointment-btn">Make Appointment</a>
+                     </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                     <div class="quality-system-right-con position-relative text-center">
+                        <figure class="mb-0 left-curve-img wow slideInLeft">
+                           <img src="{% static 'mainproj/medtech/assets/image/small-left-curve-img.png' %}" alt="" class="img-fluid">
+                        </figure>
+                        <figure class="mb-0">
+                           <img src="{% static 'mainproj/medtech/assets/image/quality-system-img.png' %}" alt="quality-system-img" class="img-fluid human-img">
+                        </figure>
+                        <figure class="mb-0 right-curve-img wow slideInRight">
+                           <img src="{% static 'mainproj/medtech/assets/image/small-right-curve-img.png' %}" alt="" class="img-fluid">
+                        </figure>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- quality-system-section -->
+      <!-- offer-section -->
+      <section>
+         <div class="w-100 float-left offer-con">
+            <div class="container">
+               <div class="offer-inner-con banner-overlay-img">
+                  <div class="row">
+                     <div class="col-lg-6 col-md-6 col-12 order-xl-0 order-lg-0 order-md-0 order-2">
+                        <div class="offer-left-con position-relative overlay-img">
+                           <figure class="mb-0">
+                              <img src="{% static 'mainproj/medtech/assets/image/offer-section-img.png' %}" alt="offer-section-img" class="img-fluid">
+                           </figure>
+                        </div>
+                     </div>
+                     <div class="col-lg-6 col-md-6 col-12">
+                        <div class="offer-right-con overlay-img">
+                           <h2 class="text-white">Protective Gears<br>
+                              for <span>Covid</span> Protection<br>
+                              Don’t miss it!
+                           </h2>
+                           <a href="contact.html" class="shope-btn">Shop Now</a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="offer-note">
+                     <h4 class="text-white mb-0">25% <span class="d-block">OFF</span></h4>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- offer-section -->
+      <!-- fun-facts-section-->
+      <section>
+         <div class="w-100 float-left fun-facts-con">
+            <div class="container">
+               <div class="row text-xl-left text-lg-left text-center">
+                  <div class="col-lg-6">
+                     <div class="fun-facts-heading ">
+                        <h2>A Healing Touch to Heal
+                           you Completely.
+                        </h2>
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="fun-facts-content">
+                        <p class=" mb-0">Seram ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt aenean leo ligula, porttitor eu consequat vitae eleifend ac enim aliqu am </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="fun-facts-box-con text-sm-left text-center">
+                  <div class="row bg-white">
+                     <div class="col-lg-3 col-md-6 col-6 pl-0 pr-0 border-right-0">
+                        <div class="fun-facts-box-item d-sm-flex align-items-sm-center">
+                           <figure class="mb-0 d-inline-block">
+                              <img src="{% static 'mainproj/medtech/assets/image/fun-facts-icon1.png' %}" alt="fun-facts-icon1" class="img-fluid">
+                           </figure>
+                           <div class="fun-facts-item-content d-inline-block">
+                              <div class="position-relative fun-facts-item-title d-inline-block">
+                                 <h2 class="count">814</h2>
+                                 <span>+</span>
+                              </div>
+                              <p class="mb-0">Happy Patients</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-lg-3 col-md-6 col-6 pl-0 pr-0 border-right-0">
+                        <div class="fun-facts-box-item d-sm-flex align-items-sm-center">
+                           <figure class="mb-0 d-inline-block">
+                              <img src="{% static 'mainproj/medtech/assets/image/fun-facts-icon2.png' %}" alt="fun-facts-icon1" class="img-fluid">
+                           </figure>
+                           <div class="fun-facts-item-content d-inline-block">
+                              <div class="position-relative fun-facts-item-title d-inline-block">
+                                 <h2 class="count">522</h2>
+                                 <span>+</span>
+                              </div>
+                              <p class="mb-0">Hospital Room</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-lg-3 col-md-6 col-6 pl-0 pr-0 border-right-0">
+                        <div class="fun-facts-box-item d-sm-flex align-items-sm-center">
+                           <figure class="mb-0 d-inline-block">
+                              <img src="{% static 'mainproj/medtech/assets/image/fun-facts-icon3.png' %}" alt="fun-facts-icon1" class="img-fluid">
+                           </figure>
+                           <div class="fun-facts-item-content d-inline-block">
+                              <div class="position-relative fun-facts-item-title d-inline-block">
+                                 <h2 class="count">99</h2>
+                                 <span>+</span>
+                              </div>
+                              <p class="mb-0">Qualified Doctor</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-lg-3 col-md-6 col-6 pl-0 pr-0">
+                        <div class="fun-facts-box-item d-sm-flex align-items-sm-center">
+                           <figure class="mb-0 d-inline-block">
+                              <img src="{% static 'mainproj/medtech/assets/image/fun-facts-icon4.png' %}" alt="fun-facts-icon1" class="img-fluid">
+                           </figure>
+                           <div class="fun-facts-item-content d-inline-block">
+                              <div class="position-relative fun-facts-item-title d-inline-block">
+                                 <h2 class="count">96</h2>
+                                 <span>%</span>
+                              </div>
+                              <p class="mb-0">Positive Feedback</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- fun-facts-section-->
+      <!-- form-section -->
+      <section>
+         <div class="w-100 float-left form-main-con" id="contact-form">
+            <div class="container">
+               <div class="text-center">
+                  <h2>Book An Appointment</h2>
+                  <p>Seram ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt aenean<br>
+                     leo ligula porttitor eu consequat vitae eleifend tac.
+                  </p>
+               </div>
+               <div class="row">
+                  <div class="col-lg-6 order-xl-0 order-lg-0 order-2">
+                     <div class="form-left-con position-relative text-center">
+                        <figure class="mb-0 left-curve-img wow slideInLeft">
+                           <img src="{% static 'mainproj/medtech/assets/image/small-left-curve-img.png' %}" alt="" class="img-fluid">
+                        </figure>
+                        <figure class="mb-0">
+                           <img src="{% static 'mainproj/medtech/assets/image/form-left-img.png' %}" alt="form-left-img" class="img-fluid human-img form-left-img">
+                        </figure>
+                        <figure class="mb-0 right-curve-img wow slideInRight">
+                           <img src="{% static 'mainproj/medtech/assets/image/small-right-curve-img.png' %}" alt="" class="img-fluid">
+                        </figure>
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <form class="contact-form">
+                        <div class="form-group">
+                           <label for="exampleFormControlSelect1" class="text-white">Department</label>
+                           <select class="form-control position-relative" id="exampleFormControlSelect1">
+                              <option>General Health Checkup</option>
+                              <option>General Health Checkup</option>
+                              <option>General Health Checkup</option>
+                              <option>General Health Checkup</option>
+                              <option>General Health Checkup</option>
+                           </select>
+                           <i class="fas fa-angle-down"></i>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6 col-md-6">
+                              <div class="form-group">    
+                                 <input type="text" class="form-control" placeholder="Name:" name="name" id="name"> 
+                              </div>
+                           </div>
+                           <div class="col-lg-6 col-md-6">
+                              <div class="form-group">
+                                 <input type="email" class="form-control" placeholder="Email:">
+                                 <small id="emailHelp" class="form-text text-muted"></small>
+                              </div>
+                           </div>
+                           <div class="col-lg-6 col-md-6">
+                              <div class="form-group">    
+                                 <input type="time" class="form-control" > 
+                              </div>
+                           </div>
+                           <div class="col-lg-6 col-md-6">
+                              <div class="form-group">
+                                 <select class="form-control position-relative">
+                                    <option>Choose Doctor </option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                 </select>
+                                 <i class="fas fa-angle-down down-icon"></i>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-12">
+                              <div class="textarea form-group W-100">    
+                                 <textarea class="form-control "  placeholder="Message:" rows="3" name="comments" id="comments"></textarea>
+                              </div>
+                           </div>
+                        </div>
+                        <button type="submit" class="btn  appointment-btn">Make Appointment</button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- form-section -->
+      <!-- slider-section -->
+      <section>
+         <div class="w-100 float-left slider-con text-lg-left text-center">
+            <div class="container">
+               <div class="slider-inner-con banner-overlay-img">
+                  <div class="row overlay-img">
+                     <div class="col-lg-6 d-flex align-items-center">
+                        <div class="slider-left-con">
+                           <h2 class="text-white">What Our <br>
+                              Patients Say About
+                              Our Services
+                           </h2>
+                           <p class="mb-0">4.8 Overall Rating, Based<br>
+                              on 2500+ Reviews.
+                           </p>
+                        </div>
+                     </div>
+                     <div class="col-lg-6">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                           <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                 <div class="auther-con w-100 d-inline-block">
+                                    <figure class="mb-0 d-inline-block">
+                                       <img src="{% static 'mainproj/medtech/assets/image/auther-img.png' %}" alt="auther-img" class="img-fluid">
+                                    </figure>
+                                    <div class="auther-title d-inline-block">
+                                       <h4 class="text-white">Victoria Sullivan</h4>
+                                       <p class="mb-0">Dental Patient</p>
+                                    </div>
+                                 </div>
+                                 <p class="text-white mb-0">Seram ipsum dolor sit amet consectetur adipiscing elit sed do eius mod tempor incididunt aenean leo ligula portti tor eu consequat vitae eleifend tac phasellus viverra nulla utm etus varius laoreetuisque rutrumenean imperdiet tiam ultri cies nisi vel augues mod tempor in.</p>
+                              </div>
+                              <div class="carousel-item">
+                                 <div class="auther-con w-100 d-inline-block">
+                                    <figure class="mb-0 d-inline-block">
+                                       <img src="{% static 'mainproj/medtech/assets/image/auther-img.png' %}" alt="auther-img" class="img-fluid">
+                                    </figure>
+                                    <div class="auther-title d-inline-block">
+                                       <h4 class="text-white">Victoria Sullivan</h4>
+                                       <p class="mb-0">Dental Patient</p>
+                                    </div>
+                                 </div>
+                                 <p class="text-white mb-0">Seram ipsum dolor sit amet consectetur adipiscing elit sed do eius mod tempor incididunt aenean leo ligula portti tor eu consequat vitae eleifend tac phasellus viverra nulla utm etus varius laoreetuisque rutrumenean imperdiet tiam ultri cies nisi vel augues mod tempor in.</p>
+                              </div>
+                              <div class="carousel-item">
+                                 <div class="auther-con w-100 d-inline-block">
+                                    <figure class="mb-0 d-inline-block">
+                                       <img src="{% static 'mainproj/medtech/assets/image/auther-img.png' %}" alt="auther-img" class="img-fluid">
+                                    </figure>
+                                    <div class="auther-title d-inline-block">
+                                       <h4 class="text-white">Victoria Sullivan</h4>
+                                       <p class="mb-0">Dental Patient</p>
+                                    </div>
+                                 </div>
+                                 <p class="text-white mb-0">Seram ipsum dolor sit amet consectetur adipiscing elit sed do eius mod tempor incididunt aenean leo ligula portti tor eu consequat vitae eleifend tac phasellus viverra nulla utm etus varius laoreetuisque rutrumenean imperdiet tiam ultri cies nisi vel augues mod tempor in.</p>
+                              </div>
+                           </div>
+                           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                              <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+                              <i class="fas fa-arrow-left"></i>
+                              <span class="sr-only">Previous</span>
+                           </a>
+                           <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                              <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+                              <i class="fas fa-arrow-right"></i>
+                              <span class="sr-only">Next</span>
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- slider-section -->
+      <!-- blog section -->
+      <section>
+         <div class="w-100 float-left blog-con">
+            <div class="container">
+               <div class="text-center">
+                  <h2>Our Latest News</h2>
+                  <p>Seram ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt aenean<br>
+                     leo ligula porttitor eu consequat vitae eleifend tac.
+                  </p>
+               </div>
+               <div class="row">
+                  <div class="col-lg-4 col-md-4">
+                     <a href="single-post.html">
+                        <div class="blog-item">
+                           <figure class="mb-0">
+                              <img src="{% static 'mainproj/medtech/assets/image/blog-img1.jpg' %}" alt="blog-img" class="img-fluid">
+                           </figure>
+                           <div class="blog-item-content">
+                              <div class="blog-item-auther-name">
+                                 <span>By David William</span>
+                                 <span>Dec 1, 2022</span>
+                              </div>
+                              <h4>Quis autem vea eum iure 
+                                 reprehenderit</h4>
+                              <p class="mb-0">Dolor repellendus temporibus aute quibu
+                                 sdam officiis debitis rerum</p>
+                           </div>
+                        </div>
+                     </a>                     
+                  </div>
+                  <div class="col-lg-4 col-md-4">
+                     <a href="single-post.html">
+                        <div class="blog-item">
+                           <figure class="mb-0">
+                              <img src="{% static 'mainproj/medtech/assets/image/blog-img2.jpg' %}" alt="blog-img" class="img-fluid">
+                           </figure>
+                           <div class="blog-item-content">
+                              <div class="blog-item-auther-name">
+                                 <span>By David William</span>
+                                 <span>Dec 1, 2022</span>
+                              </div>
+                              <h4>Quis autem vea eum iure 
+                                 reprehenderit</h4>
+                              <p class="mb-0">Dolor repellendus temporibus aute quibu
+                                 sdam officiis debitis rerum</p>
+                           </div>
+                        </div>
+                     </a>                     
+                  </div>
+                  <div class="col-lg-4 col-md-4">
+                     <a href="single-post.html">
+                        <div class="blog-item mb-0">
+                           <figure class="mb-0">
+                              <img src="{% static 'mainproj/medtech/assets/image/blog-img3.jpg' %}" alt="blog-img" class="img-fluid">
+                           </figure>
+                           <div class="blog-item-content">
+                              <div class="blog-item-auther-name">
+                                 <span>By David William</span>
+                                 <span>Dec 1, 2022</span>
+                              </div>
+                              <h4>Quis autem vea eum iure 
+                                 reprehenderit</h4>
+                              <p class="mb-0">Dolor repellendus temporibus aute quibu
+                                 sdam officiis debitis rerum</p>
+                           </div>
+                        </div>
+                     </a>                     
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- blog section -->
+      <!-- mobile-app-section -->
+      <section>
+         <div class="w-100 float-left mobile-app-con">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-6 col-md-6 order-xl-0 order-lg-0 order-md-0 order-2">
+                     <div class="mobile-app-left-con position-relative text-center">
+                        <figure class="mb-0">
+                           <img src="{% static 'mainproj/medtech/assets/image/mobile-img.png' %}" alt="mobile-img" class="img-fluid human-img">
+                        </figure>
+                     </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 text-xl-left text-lg-left text-md-left text-center">
+                     <div class="mobile-app-right-con">
+                        <h2>Download the medtech 
+                           Mobile App 
+                        </h2>
+                        <p>Seram ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt enean leo ligula porttitor.</p>
+                        <p>Eu consequat vitae eleifend ac enim aliqu am lorem ante dapibus in viverra quis feugiata tellus.</p>
+                        <div class="mobile-app-btn">                        
+                           <a href="https://play.google.com/store/apps" class="appointment-btn"><i class="fab fa-google-play text-white"></i>Goolge Play</a>
+                           <a href="https://www.apple.com/app-store/" class="appointment-btn"><i class="fab fa-app-store text-white"></i>App Store</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- mobile-app-section -->
+      <!-- news-letter-section -->
+      <section>
+         <div class="w-100 float-left news-letter-con">
+            <div class="container">
+               <div class="news-letter-inner-con banner-overlay-img">
+                  <div class="row overlay-img align-items-center">
+                     <div class="col-lg-6 col-md-5">
+                        <div class="news-letter-title">
+                           <h2 class="text-white mb-0">Subscribe to our 
+                              Newsletter
+                           </h2>
+                        </div>
+                     </div>
+                     <div class="col-lg-6 col-md-7">
+                        <div class="news-letter-input-con position-relative">
+                           <div class="news-letter-input-feild">
+                              <input type="email" placeholder="Enter Your Email:" class="w-100">
+                           </div>
+                           <button>
+                           <i class="far fa-envelope"></i>
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- news-letter-section -->
+      <!-- logo-section -->
+      <div class="w-100 float-left logo-con">
+         <div class="container">
+            <div class="logo-inner-con">
+               <div class="row">
+                  <div class="col-lg-2 col-md-2 col-sm-4 col-4">
+                     <figure class="mb-0">
+                        <img src="{% static 'mainproj/medtech/assets/image/client-logo-img1.png' %}" alt="client-logo-img" class="img-fluid">
+                     </figure>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-4 col-4">
+                     <figure class="mb-0">
+                        <img src="{% static 'mainproj/medtech/assets/image/client-logo-img2.png' %}" alt="client-logo-img" class="img-fluid">
+                     </figure>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-4 col-4">
+                     <figure class="mb-0">
+                        <img src="{% static 'mainproj/medtech/assets/image/client-logo-img3.png' %}" alt="client-logo-img" class="img-fluid">
+                     </figure>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-4 col-4">
+                     <figure class="mb-0">
+                        <img src="{% static 'mainproj/medtech/assets/image/client-logo-img4.png' %}" alt="client-logo-img" class="img-fluid mb-0">
+                     </figure>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-4 col-4">
+                     <figure class="mb-0">
+                        <img src="{% static 'mainproj/medtech/assets/image/client-logo-img5.png' %}" alt="client-logo-img" class="img-fluid mb-0">
+                     </figure>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-4 col-4">
+                     <figure class="mb-0">
+                        <img src="{% static 'mainproj/medtech/assets/image/client-logo-img6.png' %}" alt="client-logo-img" class="img-fluid mb-0">
+                     </figure>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- logo-section -->
+      <!-- weight-footer-section -->
+      <section>
+         <div class="w-100 float-left weight-footer-con">
+            <div class="container">
+               <div class="weight-footer-inner-con">
+                  <div class="row">
+                     <div class="col-lg-5 col-12 text-xl-left text-lg-left text-center">
+                        <div class="weight-footer-content ">
+                           <figure>
+                              <img src="{% static 'mainproj/medtech/assets/image/footer-logo.png' %}" alt="footer-logo" class="img-fluid">
+                           </figure>
+                           <p class="col-lg-11 col-md-7 pl-0 pr-0 ml-lg-0 mr-lg-0 ml-md-auto mr-md-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elitsed do eiusmod tempororem ipsum dolor sit am econsect ametconsectetetur adipiscing.</p>
+                           <div class="weight-social-list">
+                              <ul class="list-unstyled mb-0">
+                                 <li class="d-inline-block"><a href="https://www.facebook.com/"><i class="fab fa-facebook-square d-flex align-items-center justify-content-center text-white pr-0"></i></a></li>
+                                 <li class="d-inline-block"><a href="https://twitter.com/?lang=en"><i class="fab fa-twitter-square d-flex align-items-center justify-content-center text-white pr-0"></i></a></li>
+                                 <li class="d-inline-block"><a href="https://www.linkedin.com/signup"><i class="fab fa-linkedin d-flex align-items-center justify-content-center text-white pr-0"></i></a></li>
+                                 <li class="d-inline-block"><a href="https://www.pinterest.com/"><i class="fab fa-pinterest-square mr-0 d-flex align-items-center justify-content-center text-white pr-0"></i></a></li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-lg-2 col-md-4 col-sm-4 col-6">
+                        <div class="weight-footer-content">
+                           <h5>Important Link</h5>
+                           <ul class="list-unstyled mb-0">
+                              <li><i class="fas fa-caret-right"></i>Appointment</li>
+                              <li><i class="fas fa-caret-right"></i>Doctors</li>
+                              <li><i class="fas fa-caret-right"></i>Services</li>
+                              <li><i class="fas fa-caret-right"></i>Specialties</li>
+                              <li><i class="fas fa-caret-right"></i>Neurology</li>
+                              <li class="mb-0"><i class="fas fa-caret-right"></i>Oncology</li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="col-lg-2 col-md-3 col-sm-3 col-6">
+                        <div class="weight-footer-content">
+                           <h5>Support</h5>
+                           <ul class="list-unstyled mb-0">
+                              <li><i class="fas fa-caret-right"></i>Support</li>
+                              <li><i class="fas fa-caret-right"></i>Contact Us</li>
+                              <li><i class="fas fa-caret-right"></i>Knowledge Base</li>
+                              <li><i class="fas fa-caret-right"></i>About Us</li>
+                              <li><i class="fas fa-caret-right"></i>Faq</li>
+                              <li class="mb-0"><i class="fas fa-caret-right"></i>Partnerships</li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="col-lg-3 col-md-5 col-sm-5 col-12">
+                        <div class="weight-footer-content">
+                           <h5>Get in Touch</h5>
+                           <ul class="list-unstyled mb-0">
+                              <li><span>Email: </span>info@medtech.com</li>
+                              <li><span>Phone: </span>+1 234 567 89 0 0</li>
+                              <li><span>Fax: </span>+1 ( 987 ) 654 321  9 9</li>
+                              <li class="mb-0"><span class="pr-2">Address:</span>King Street Melbourne,
+                                 3000, Australia
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- weight-footer-section -->
+      <!-- footer-section -->
+      <div class="w-100 float-left footer-con text-xl-left text-lg-left text-center">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-6 col-md-6 col-12">
+                  <p class="mb-0">Copyright ©2022 medtech.com All Rights Reserved</p>
+               </div>
+               <div class="col-lg-6 col-md-6 col-12 d-flex justify-content-xl-end justify-content-lg-end justify-content-center">
+                  <figure class="mb-0 d-inline-block">
+                     <img src="{% static 'mainproj/medtech/assets/image/payment-img1.png' %}" alt="payment-img" class="img-fluid">
+                  </figure>
+                  <figure class="mb-0 d-inline-block">
+                     <img src="{% static 'mainproj/medtech/assets/image/payment-img2.png' %}" alt="payment-img" class="img-fluid">
+                  </figure>
+                  <figure class="mb-0 d-inline-block">
+                     <img src="{% static 'mainproj/medtech/assets/image/payment-img3.png' %}" alt="payment-img" class="img-fluid">
+                  </figure>
+                  <figure class="mb-0 d-inline-block mr-0">
+                     <img src="{% static 'mainproj/medtech/assets/image/payment-img4.png' %}" alt="payment-img" class="img-fluid">
+                  </figure>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer-section -->
+      <script src="{% static 'mainproj/medtech/assets/js/jquery-3.6.0.min.js' %}"> </script>
+      <script src="{% static 'mainproj/medtech/assets/js/popper.min.js' %}"> </script>
+      <script src="{% static 'mainproj/medtech/assets/js/wow.js' %}"></script>
+      <script>
+         new WOW().init();
+      </script>
+      <script src="{% static 'mainproj/medtech/assets/js/bootstrap.min.js' %}"> </script>
+      <script src="{% static 'mainproj/medtech/assets/js/custom-script.js' %}"> </script>
+   </body>
+
+<!-- Mirrored from html.designingmedia.com/medtech/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2025 07:10:32 GMT -->
+</html>

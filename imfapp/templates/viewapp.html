@@ -1,0 +1,39 @@
+<!-- viewappointment.html -->
+<h2>View Appointments:</h2>
+    <table border="1" class="table table-stripped">
+    <thead>
+        <tr>
+            <th>Doctor</th>
+            <th>Department</th>
+            <th>Date</th>
+            <th>Time</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for appointment in appointments %}
+        <tr>
+            <td>{{ appointment.doctor_register.doc_name }}</td> <!-- Access patient name -->
+            <td>{{ appointment.doctor_register.department }}</td>  <!-- Access gender -->
+            <td>{{ appointment.date }}</td>  <!-- Access appointment date -->
+            <td>{{ appointment.time }}</td>  <!-- Access appointment time -->
+            <td>
+                <a href="{% url 'editviewapp' appointment.id %}">EDIT</a></td>
+               <td> <a href="{% url 'delete_appointment' appointment.id %}">DELETE</a>
+
+            </td>
+            {% if appointment.cancel_status == 1 %}
+             
+            <td> cancelled </td>  
+            {% else %}
+            <td><a href="{% url 'appointment_cancel' appointment.id %}">CANCEL</a></td>
+            {% endif %}
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No appointments scheduled.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table> 
+

@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Department</title>
+</head>
+<body>
+    <h1>Search Doctors by Department</h1>
+
+    <form method="GET" action="{% url 'departmentsearch' %}">
+        <input type="text" name="q" placeholder="Search by department" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h2>Search Results:</h2>
+        <table border="1" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Doctor Name</th>
+                    <th>Department</th>
+                    <th>Specialisation</th>
+                    <th>Consultation Fee</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doctor in results %}
+                    <tr>
+                        <td>{{ doctor.doc_name }}</td>
+                        <td>{{ doctor.department }}</td>
+                        <td>{{ doctor.specialisation }}</td>
+                        <td>{{ doctor.consultation_fee }}</td>
+                        <td><a href="{% url 'appointment' doctor.login_id.id doctor.consultation_fee %}">Make Appointment</a></td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>

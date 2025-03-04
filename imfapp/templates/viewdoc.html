@@ -1,0 +1,34 @@
+{% extends 'docheader.html' %}
+{% block content %}
+
+
+<center>
+    <table border="1" class="table table-stripped">
+        <tr>
+            <th>Doctor Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Department</th>
+            <th>Specialisation</th>
+            <th>Doctor License</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        {% for a in data %}
+        <tr>
+        <td>{{a.doc_name}}</td>
+        <td>{{a.gender}}</td>
+        <td>{{a.age}}</td>
+        <td>{{a.department}}</td>
+        <td>{{a.specialisation}}</td>
+        <td><img src={{a.doc_license.url}} height="100px" width="100px"></td>
+        <td>{{a.doc_contact}}</td>
+        <td>{{a.login_id.email}}</td>
+        <td>
+            <a href="{% url 'consultation_fee' a.id %}">ADD CONSULTATION FEE</a></td>
+    </tr>
+    {% endfor %}
+    </table>
+    
+{% endblock %}
