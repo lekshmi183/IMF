@@ -1,0 +1,29 @@
+{% extends 'docheader.html' %}
+{% block content %}
+
+
+<center>
+    <table border="1" class="table table-stripped">
+        <tr>
+            <th>Patient Name</th>
+            <th>Address</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        {% for a in data %}
+                                            <tr>
+                                            <td>{{a.patient_name}}</td>
+                                            <td>{{a.address}}</td>
+                                            <td>{{a.gender}}</td>
+                                            <td>{{a.age}}</td>
+                                            <td>{{a.patient_contact}}</td>
+                                            <td>{{a.login_id.email}}</td>
+                                            <td><a href="{% url 'viewambdata' a.id %}">TRANSFER</a></td>
+                                        </tr>
+    {% endfor %}
+    </table>
+    
+{% endblock %}

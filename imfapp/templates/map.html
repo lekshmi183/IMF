@@ -1,0 +1,30 @@
+{% extends 'docheader.html' %}
+{% block content %}
+<center>
+    <table border="1" class="table table-stripped">
+        <tr>
+            <th>Vehicle Category</th>
+            <th>Vehicle Type</th>
+            <th>Vehicle Number</th>
+            <th>Driver Name</th>
+            <th>Driver Contact</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        {% for location in locations %}
+        <tr>
+            <td>{{ location.vehicle_category }}</td>
+            <td>{{ location.vehicle_type }}</td>
+            <td>{{ location.vehicle_no }}</td>
+            <td>{{ location.driver_name }}</td>
+            <td>{{ location.driver_contact }}</td>
+            <td>{{ location.amb_login_id.email }}</td>
+            <td>
+                <!-- Create a link that will open the location in Google Maps -->
+                <a href="https://www.google.com/maps?q={{ location.latitude }},{{ location.longitude }}" target="_blank">View Location on Google Maps</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+{% endblock %}

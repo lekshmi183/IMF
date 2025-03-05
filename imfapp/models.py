@@ -1,5 +1,5 @@
 from django.db import models
-
+import uuid
 class HospitalRegister(models.Model):
     hosp_name=models.CharField(max_length=255)
     hosp_address=models.CharField(max_length=255)
@@ -33,6 +33,9 @@ class PatientRegister(models.Model):
    age=models.IntegerField()
    patient_contact=models.CharField(max_length=20)
    login_id=models.ForeignKey('Login',on_delete=models.CASCADE)
+   MRnumber = models.CharField(max_length=20, unique=True, editable=False)
+
+    
 
 class Appointment(models.Model):
     date = models.DateField()
@@ -61,8 +64,13 @@ class AmbulanceRegister(models.Model):
    driver_name=models.CharField(max_length=255)
    driver_contact=models.CharField(max_length=15)
    hosp_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='hosp_loginid')
-   amb_login_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='amb_login_id')
+   amb_login_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='amb_login')
 
-
-
-    
+class Location(models.Model):
+   latitude = models.FloatField()  # Store the latitude of the selected location
+   longitude = models.FloatField() 
+   current_date = models.DateTimeField(auto_now_add=True)
+   pat_id=models.ForeignKey('PatientRegister',on_delete=models.CASCADE,related_name='pat_loginid',null=True)
+   amb_login_id=models.ForeignKey('AmbulanceRegister',on_delete=models.CASCADE,related_name='amb_loginid',null=True)
+   def __str__(self):
+        return f"Location {self.location} ({self.latitude}, {self.longitude})"

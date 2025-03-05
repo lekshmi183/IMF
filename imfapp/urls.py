@@ -39,6 +39,14 @@ urlpatterns = [
      path('ambprofedit/<int:id>/',views.ambprofedit,name='ambprofedit'),
      path('delete_ambulance/<int:id>/', views.delete_ambulance, name='delete_ambulance'),
      path('refund/<int:id>/<int:amount>/', views.refund, name='refund'),
+     path('viewtransferpatients', views.viewtransferpatients, name='viewtransferpatients'),
+     path('viewambdata/<int:id>', views.viewambdata, name='viewambdata'),
+     path('location', views.view_location, name='location'),
+     path('save-location/', views.save_location, name='save_location'),
+     path('viewtransferedpatients/', views.viewtransferedpatients, name='viewtransferedpatients'),
+
+
+
 
 
 

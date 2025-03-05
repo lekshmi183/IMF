@@ -60,9 +60,6 @@
                         <li class="nav-item">
                            <a class="nav-link p-0 text-white" href="{% url 'hospprofedit' %}">Profile</a>
                         </li>
-                        <li class="nav-item">
-                           <a class="nav-link p-0 text-white" href="services.html">Services</a>
-                        </li>
                         <li class="nav-item dropdown pr-lg-0">
                            <a class="nav-link dropdown-toggle p-0 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                              Ambulance
@@ -80,6 +77,15 @@
                              <a class="dropdown-item" href="{% url 'doc_reg' %}">Add Doctor</a>
                              <a class="dropdown-item" href="{% url 'view_doc' %}">View Doctor</a>
                              
+                           </div>
+                         </li>
+                         <li class="nav-item dropdown pr-lg-0">
+                           <a class="nav-link dropdown-toggle p-0 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Patient Transfer
+                           </a>
+                           <div class="dropdown-menu p-0" aria-labelledby="navbarDropdown">
+                             <a class="dropdown-item" href="{% url 'viewtransferpatients' %}">Add Transfer</a>
+                             <a class="dropdown-item" href="">View Transfer</a>
                            </div>
                          </li>
                          <li class="nav-item">

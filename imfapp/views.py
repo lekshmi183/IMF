@@ -410,3 +410,85 @@ def delete_ambulance(request, id):
     ambulance = get_object_or_404(AmbulanceRegister, id=id)
     ambulance.delete()
     return redirect('view_amb') 
+
+def viewtransferpatients(request):
+    view_id=PatientRegister.objects.all()
+    return render(request,'viewtransferpatients.html',{'data':view_id}) 
+
+def viewambdata(request,id):
+    pat_id=get_object_or_404(PatientRegister,id=id)
+    hosp_id=request.session.get('hosp_id')
+    hid=get_object_or_404(Login,id=hosp_id)
+    amb_id=AmbulanceRegister.objects.filter(hosp_id=hid)
+    return render(request,'viewambdata.html',{'data':amb_id,'patient':pat_id})
+
+# # def location(request):
+from django.http import JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
+# @csrf_exempt
+# def save_location(request):
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         ambulance_id = data.get('ambulanceId')
+#         latitude = data.get('latitude')
+#         longitude = data.get('longitude')
+
+#         # Optionally, you can use reverse geocoding to get the location name based on the coordinates
+#         # (Here, we assume you already know the location or will retrieve it from a service)
+
+#         location_name = "Some Address"  # You can either get this from the map click, or use a geocoding service
+
+#         # Save the new Location
+#         location = Location(
+#             location=location_name,
+#             latitude=latitude,
+#             longitude=longitude,
+#             amb_login_id_id=ambulance_id  # Link the ambulance driver via the ForeignKey
+#         )
+#         location.save()
+
+#         return JsonResponse({"status": "success"})
+#     return JsonResponse({"status": "error"}, status=400)
+@csrf_exempt
+def save_location(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        latitude = data.get('latitude')
+        longitude = data.get('longitude')
+        patid= data.get('patid')
+        ambid= data.get('ambid')
+        p=get_object_or_404(PatientRegister,id=patid)
+        amb=get_object_or_404(AmbulanceRegister,id=ambid)
+
+        if not all([latitude, longitude,patid,ambid]):
+            return JsonResponse({"status": "error", "message": "Missing required fields"}, status=400)
+
+        # Create and save the Location instance
+        location = Location(
+            latitude=latitude,
+            longitude=longitude,
+            pat_id=p,
+            amb_login_id=amb
+
+        )
+        location.save()
+
+        return JsonResponse({"status": "success"})
+    
+    return JsonResponse({"status": "error", "message": "Invalid request method"}, status=400)
+
+
+def view_location(request):
+    # Retrieve all locations from the database (you may filter based on some condition)
+    locations = Location.objects.all()  # You can filter for specific location if needed
+
+    # Send the locations (latitude and longitude) to the template
+    return render(request, 'map.html', {'locations': locations})
+
+def viewtransferedpatients(request):
+    amb_id=request.session.get('amb_id')
+    hid=get_object_or_404(AmbulanceRegister,amb_login_id=amb_id)
+    am_id=Location.objects.filter(amb_login_id=hid)
+    return render(request,'viewtransferedpatients.html',{'data':am_id})
