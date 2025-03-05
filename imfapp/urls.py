@@ -47,6 +47,9 @@ urlpatterns = [
 
 
 
+     path('add_prescription/<int:id>/', views.add_prescription, name='add_prescription'),
+     path('editprescription/<int:id>/',views.editprescription,name='editprescription'),
+     path('delete_prescription/<int:id>/',views.delete_prescription,name='delete_prescription'),
 
 
 

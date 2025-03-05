@@ -119,3 +119,11 @@ class amb_login_form(forms.ModelForm):
     class Meta:
         model=Login
         fields=['email']
+        
+class prescription_form(forms.ModelForm):
+    class Meta:
+        model=Appointment
+        fields=['prescription']
+        widget={
+            'prescription':forms.TextInput(attrs={'class':'form-control'})
+        }

@@ -243,7 +243,7 @@ def viewappointment(request):
     doctor = get_object_or_404(Login, id=doctor_id) 
     fee=get_object_or_404(DoctorRegister, login_id=doctor_id)
     print(fee)
-    appointments = Appointment.objects.filter(login_id=doctor)
+    appointments = Appointment.objects.filter(login_id=doctor,payment_status=1)
     
     for appointment in appointments:
         appointment.patient_register = PatientRegister.objects.get(login_id=appointment.patient_id)  
@@ -411,6 +411,7 @@ def delete_ambulance(request, id):
     ambulance.delete()
     return redirect('view_amb') 
 
+<<<<<<< HEAD
 def viewtransferpatients(request):
     view_id=PatientRegister.objects.all()
     return render(request,'viewtransferpatients.html',{'data':view_id}) 
@@ -492,3 +493,42 @@ def viewtransferedpatients(request):
     hid=get_object_or_404(AmbulanceRegister,amb_login_id=amb_id)
     am_id=Location.objects.filter(amb_login_id=hid)
     return render(request,'viewtransferedpatients.html',{'data':am_id})
+=======
+def add_prescription(request,id):
+    appid = get_object_or_404(Appointment,id=id)
+    if request.method=='POST': 
+        form1=prescription_form(request.POST)
+        print(form1)
+        if form1.is_valid():
+            b=form1.cleaned_data['prescription']
+            # a=form1.save(commit=False)
+            appid.prescription=b 
+            appid.prescription_status=1
+            appid.save()
+            return redirect('viewappointment')
+
+    else:
+        form1=prescription_form()
+    return render(request,'addprescription.html',{'form': form1})   
+
+def editprescription(request,id):
+
+    appid = get_object_or_404(Appointment, id=id )
+
+    if request.method == 'POST':
+        form1= prescription_form(request.POST, instance=appid)
+        if form1.is_valid():
+            form1.save()
+            return redirect('viewappointment')
+    else:
+        form1= prescription_form(instance=appid)
+    
+    return render(request,'editprescription.html',{'form': form1})
+
+
+def delete_prescription(request,id):
+    prescription = get_object_or_404(Appointment,id=id)
+    prescription.prescription='no prescription'
+    prescription.save()
+    return redirect('viewappointment') 
+>>>>>>> 38a8139a66032cba36b3bf9b5ceb4a41a087c89b

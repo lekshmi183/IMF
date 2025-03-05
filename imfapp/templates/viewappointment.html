@@ -9,7 +9,7 @@
             <th>Time</th>
             <th>Status</th>
             <th>Action</th>
-            <th></th>
+            <th>Prescription</th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +30,13 @@
                 {% else %}
                 <td><a href="{% url 'refund' appointment.id fee.consultation_fee %}">REFUND</a></td>
                 {% endif %}
+                {% if appointment.prescription_status == 1 %}
+                    <td>{{appointment.prescription}}</td>
+                {% else %}
+                <td><a href="{% url 'add_prescription' appointment.id %}">ADD PRESCRIPTION</a></td>
+                {% endif %}
+            <td><a href="{% url 'editprescription' appointment.id %}">EDIT</a></td>
+            <td><a href="{% url 'delete_prescription' appointment.id %}">DELETE</a></td>
         </tr>
         {% empty %}
         <tr>

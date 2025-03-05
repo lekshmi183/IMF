@@ -17,6 +17,7 @@
             <td>{{ appointment.doctor_register.department }}</td>  <!-- Access gender -->
             <td>{{ appointment.date }}</td>  <!-- Access appointment date -->
             <td>{{ appointment.time }}</td>  <!-- Access appointment time -->
+            <td>{{ appointment.prescription }}</td>
             <td>
                 <a href="{% url 'editviewapp' appointment.id %}">EDIT</a></td>
                <td> <a href="{% url 'delete_appointment' appointment.id %}">DELETE</a>
