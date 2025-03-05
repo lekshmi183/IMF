@@ -1,0 +1,44 @@
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore virtual environment folder (change to match your environment name)
+venv/
+env/
+.venv/
+ENV/
+
+# Ignore Django migrations
+*/migrations/*
+
+# Ignore database files (SQLite default for development)
+db.sqlite3
+
+# Ignore the cache folder (if using Django's caching mechanism)
+*.cache
+*.log
+
+# Ignore media and static files (optional, only if you don't want to track them in Git)
+media/
+static/
+
+# Ignore environment configuration files (e.g., secrets, sensitive info)
+.env
+*.env
+
+# Ignore coverage reports
+.coverage
+coverage.xml
+nosetests.xml
+*.cover
+
+# Ignore pyenv files
+.python-version
+
+# Ignore IDE files (optional)
+.idea/
+.vscode/
+
+# Ignore log files
+*.log
