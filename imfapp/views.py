@@ -411,7 +411,6 @@ def delete_ambulance(request, id):
     ambulance.delete()
     return redirect('view_amb') 
 
-<<<<<<< HEAD
 def viewtransferpatients(request):
     view_id=PatientRegister.objects.all()
     return render(request,'viewtransferpatients.html',{'data':view_id}) 
@@ -493,7 +492,7 @@ def viewtransferedpatients(request):
     hid=get_object_or_404(AmbulanceRegister,amb_login_id=amb_id)
     am_id=Location.objects.filter(amb_login_id=hid)
     return render(request,'viewtransferedpatients.html',{'data':am_id})
-=======
+
 def add_prescription(request,id):
     appid = get_object_or_404(Appointment,id=id)
     if request.method=='POST': 
@@ -531,4 +530,3 @@ def delete_prescription(request,id):
     prescription.prescription='no prescription'
     prescription.save()
     return redirect('viewappointment') 
->>>>>>> 38a8139a66032cba36b3bf9b5ceb4a41a087c89b
