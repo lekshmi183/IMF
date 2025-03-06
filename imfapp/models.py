@@ -34,6 +34,20 @@ class PatientRegister(models.Model):
    patient_contact=models.CharField(max_length=20)
    login_id=models.ForeignKey('Login',on_delete=models.CASCADE)
    MRnumber = models.CharField(max_length=20, unique=True, editable=False)
+   def save(self, *args, **kwargs):
+        if not self.MRnumber:  # Only generate if not already assigned
+            self.MRnumber = self.generate_unique_mrnumber()
+        super().save(*args, **kwargs)
+
+   def generate_unique_mrnumber(self):
+        """Generate a unique MR number"""
+        while True:
+            new_mrnumber = f"MR-{uuid.uuid4().hex[:5].upper()}"  # Example: MR-AB12CD34E5
+            if not PatientRegister.objects.filter(MRnumber=new_mrnumber).exists():
+                return new_mrnumber
+
+   def __str__(self):
+        return f"{self.patient_name} - {self.MRnumber}"
 
     
 
