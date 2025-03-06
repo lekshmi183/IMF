@@ -44,12 +44,11 @@ urlpatterns = [
      path('location', views.view_location, name='location'),
      path('save-location/', views.save_location, name='save_location'),
      path('viewtransferedpatients/', views.viewtransferedpatients, name='viewtransferedpatients'),
-
-
-
      path('add_prescription/<int:id>/', views.add_prescription, name='add_prescription'),
      path('editprescription/<int:id>/',views.editprescription,name='editprescription'),
      path('delete_prescription/<int:id>/',views.delete_prescription,name='delete_prescription'),
+     path('approve/<int:id>/',views.approve,name='approve'),
+     path('reject/<int:id>/',views.reject,name='reject'),
 
 
 

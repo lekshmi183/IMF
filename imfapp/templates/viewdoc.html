@@ -13,7 +13,7 @@
             <th>Doctor License</th>
             <th>Contact</th>
             <th>Email</th>
-            <th></th>
+            <th>Consultation Fee</th>
         </tr>
         {% for a in data %}
         <tr>
@@ -25,8 +25,9 @@
         <td><img src={{a.doc_license.url}} height="100px" width="100px"></td>
         <td>{{a.doc_contact}}</td>
         <td>{{a.login_id.email}}</td>
-        <td>
-            <a href="{% url 'consultation_fee' a.id %}">ADD CONSULTATION FEE</a></td>
+        <td>{{a.consultation_fee}}</td>
+        <!-- <td>
+            <a href="{% url 'consultation_fee' a.id %}">ADD CONSULTATION FEE</a></td> -->
     </tr>
     {% endfor %}
     </table>

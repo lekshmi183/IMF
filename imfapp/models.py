@@ -8,11 +8,14 @@ class HospitalRegister(models.Model):
     hosp_state=models.CharField(max_length=100)
     hosp_contact=models.CharField(max_length=15)
     login_id=models.ForeignKey('Login',on_delete=models.CASCADE)
+    
+
    
 class Login(models.Model):
     email = models.EmailField() 
     password = models.CharField(max_length=255)
     usertype=models.IntegerField(default=0,null=True)
+    login_status=models.IntegerField(default=0)
 
 class DoctorRegister(models.Model):
    doc_name=models.CharField(max_length=255)
@@ -25,6 +28,8 @@ class DoctorRegister(models.Model):
    hosp_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='hosp_id')
    doc_contact=models.CharField(max_length=15)
    login_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='login_id')
+   
+
 
 class PatientRegister(models.Model):
    patient_name=models.CharField(max_length=255)
@@ -34,6 +39,20 @@ class PatientRegister(models.Model):
    patient_contact=models.CharField(max_length=20)
    login_id=models.ForeignKey('Login',on_delete=models.CASCADE)
    MRnumber = models.CharField(max_length=20, unique=True, editable=False)
+   def save(self, *args, **kwargs):
+        if not self.MRnumber:  # Only generate if not already assigned
+            self.MRnumber = self.generate_unique_mrnumber()
+        super().save(*args, **kwargs)
+
+   def generate_unique_mrnumber(self):
+        """Generate a unique MR number"""
+        while True:
+            new_mrnumber = f"MR-{uuid.uuid4().hex[:5].upper()}"  # Example: MR-AB12CD34E5
+            if not PatientRegister.objects.filter(MRnumber=new_mrnumber).exists():
+                return new_mrnumber
+
+   def __str__(self):
+        return f"{self.patient_name} - {self.MRnumber}"
 
     
 
@@ -48,6 +67,7 @@ class Appointment(models.Model):
     refund_status=models.IntegerField(default=0)
     prescription=models.CharField(max_length=100)
     prescription_status=models.IntegerField(default=0)
+    
 
 class Payment(models.Model):
     card_name=models.CharField(max_length=255)

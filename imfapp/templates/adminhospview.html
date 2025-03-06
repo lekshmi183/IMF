@@ -427,6 +427,7 @@
                                                 <th>State</th>
                                                 <th>Contact</th>
                                                 <th>Email</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -439,6 +440,21 @@
                                             <td>{{a.hosp_state}}</td>
                                             <td>{{a.hosp_contact}}</td>
                                             <td>{{a.login_id.email}}</td>
+                                            
+            
+                                            {% if a.login_id.login_status == 1 %}
+                                            <td>Approved</td>
+                                            <td> <a href="{% url 'reject' a.login_id.id %}">REJECT</a></td>
+                                        {% elif a.login_id.login_status == 2 %}
+                                      <td>  <a href="{% url 'approve' a.login_id.id %}">APPROVE</a></td>
+
+                                            <td>Rejected</td>
+                                            {% else %}
+                                            <td> <a href="{% url 'approve' a.login_id.id %}">APPROVE</a>
+                                                </td><td>
+                                                <a href="{% url 'reject' a.login_id.id %}">REJECT</a>
+                                                </td>
+                                        {% endif %}
                                         </tr>
                                         {% endfor %}
                                             <!-- <tr>
