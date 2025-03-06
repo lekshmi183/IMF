@@ -37,7 +37,7 @@ class doc_form(forms.ModelForm):
     class Meta:
         model=DoctorRegister
         fields=['doc_name','gender','age','department','specialisation', 'consultation_fee','doc_license','doc_contact']
-        widget={
+        widgets={
             'doc_name':forms.TextInput(attrs={'class':'form-control'}),
             'age':forms.TextInput(attrs={'class':'form-control'}),
             'gender':forms.Select(attrs={'class':'form-control'}),

@@ -8,11 +8,14 @@ class HospitalRegister(models.Model):
     hosp_state=models.CharField(max_length=100)
     hosp_contact=models.CharField(max_length=15)
     login_id=models.ForeignKey('Login',on_delete=models.CASCADE)
+    
+
    
 class Login(models.Model):
     email = models.EmailField() 
     password = models.CharField(max_length=255)
     usertype=models.IntegerField(default=0,null=True)
+    login_status=models.IntegerField(default=0)
 
 class DoctorRegister(models.Model):
    doc_name=models.CharField(max_length=255)
@@ -25,6 +28,8 @@ class DoctorRegister(models.Model):
    hosp_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='hosp_id')
    doc_contact=models.CharField(max_length=15)
    login_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='login_id')
+   
+
 
 class PatientRegister(models.Model):
    patient_name=models.CharField(max_length=255)
@@ -62,6 +67,7 @@ class Appointment(models.Model):
     refund_status=models.IntegerField(default=0)
     prescription=models.CharField(max_length=100)
     prescription_status=models.IntegerField(default=0)
+    
 
 class Payment(models.Model):
     card_name=models.CharField(max_length=255)

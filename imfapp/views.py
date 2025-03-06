@@ -43,9 +43,10 @@ def loginprocess(request):
             try:
                 user=Login.objects.get(email=email)
                 if user.password==password:
-                    if user.usertype==1:
+                    if user.usertype==1 and user.login_status==1:
                         request.session['hosp_id']=user.id
                         return redirect('hosphome')
+                    
                     elif user.usertype==2:
                         request.session['doc_id']=user.id
                         return redirect('dochome')
@@ -66,9 +67,11 @@ def loginprocess(request):
 def doc_reg(request):
     id=request.session.get('hosp_id')
     hid=get_object_or_404(Login,id=id)
+    print(id)
     if request.method == 'POST':
         form = doc_form(request.POST,request.FILES)
         login = login_form(request.POST)
+
         
         if form.is_valid() and login.is_valid():
             try:
@@ -80,7 +83,6 @@ def doc_reg(request):
                 b.login_id = a
                 b.hosp_id=hid
                 b.save()
-                
                 messages.success(request, "Form successfully submitted")
                 return redirect('hosphome')
             except Exception as e:
@@ -531,6 +533,7 @@ def delete_prescription(request,id):
     prescription.save()
     return redirect('viewappointment') 
 
+<<<<<<< HEAD
 # def viewhosptransfer(request):
 #     hosp_id=request.session.get('hosp_id')
 #     hid=get_object_or_404(HospitalRegister,login_id=hosp_id)
@@ -572,3 +575,16 @@ def cancel(request, id):
 
 
 
+=======
+def approve(request,id):
+    a=get_object_or_404(Login,id=id)
+    a.login_status=1
+    a.save()
+    return redirect('adminhospview')
+
+def reject(request,id):
+    a=get_object_or_404(Login,id=id)
+    a.login_status=2
+    a.save()
+    return redirect('adminhospview')
+>>>>>>> ec64b50bae260c7f4359ed37499adbbc49c9d852
