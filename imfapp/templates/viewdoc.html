@@ -11,6 +11,7 @@
             <th>Department</th>
             <th>Specialisation</th>
             <th>Doctor License</th>
+            <th>Consultation Fee</th>
             <th>Contact</th>
             <th>Email</th>
             <th></th>
@@ -23,10 +24,9 @@
         <td>{{a.department}}</td>
         <td>{{a.specialisation}}</td>
         <td><img src={{a.doc_license.url}} height="100px" width="100px"></td>
+        <td>{{a.consultation_fee}}</td>
         <td>{{a.doc_contact}}</td>
         <td>{{a.login_id.email}}</td>
-        <td>
-            <a href="{% url 'consultation_fee' a.id %}">ADD CONSULTATION FEE</a></td>
     </tr>
     {% endfor %}
     </table>

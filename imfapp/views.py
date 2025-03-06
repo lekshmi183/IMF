@@ -338,7 +338,7 @@ def refund(request,id,amount):
     return render(request,'refund.html',{'form': form1})        
 def amb_reg(request):
     id=request.session.get('hosp_id')
-    hid=get_object_or_404(Login,id=id)
+    hid=get_object_or_404(HospitalRegister,login_id=id)
     if request.method == 'POST':
         form = amb_form(request.POST)
         login = login_form(request.POST)
@@ -371,7 +371,7 @@ def ambhome(request):
 
 def view_amb(request):
     id=request.session.get('hosp_id')
-    hid=get_object_or_404(Login,id=id)
+    hid=get_object_or_404(HospitalRegister,login_id=id)
     amb_id=AmbulanceRegister.objects.filter(hosp_id=hid)
     return render(request,'viewamb.html',{'data':amb_id})
 
@@ -418,7 +418,7 @@ def viewtransferpatients(request):
 def viewambdata(request,id):
     pat_id=get_object_or_404(PatientRegister,id=id)
     hosp_id=request.session.get('hosp_id')
-    hid=get_object_or_404(Login,id=hosp_id)
+    hid=get_object_or_404(HospitalRegister,login_id=hosp_id)
     amb_id=AmbulanceRegister.objects.filter(hosp_id=hid)
     return render(request,'viewambdata.html',{'data':amb_id,'patient':pat_id})
 
@@ -530,3 +530,45 @@ def delete_prescription(request,id):
     prescription.prescription='no prescription'
     prescription.save()
     return redirect('viewappointment') 
+
+# def viewhosptransfer(request):
+#     hosp_id=request.session.get('hosp_id')
+#     hid=get_object_or_404(HospitalRegister,login_id=hosp_id)
+#     am_id=Location.objects.filter(amb_login_id__hosp_id=hid)
+#     query = request.GET.get('q', '') 
+
+#     if query:
+#         results = results.filter(
+#             Q(pat_id__icontains=query)  
+#         )
+#     return render(request,'viewhosptransfer.html',{'data':am_id})
+def viewhosptransfer(request):
+    hosp_id = request.session.get('hosp_id')
+    hid = get_object_or_404(HospitalRegister, login_id=hosp_id)
+    am_id = Location.objects.filter(amb_login_id__hosp_id=hid)
+
+    # Get the search query from GET parameters
+    query = request.GET.get('q', '')
+
+    if query:
+        # Filter results based on MRnumber
+        am_id = am_id.filter(pat_id__MRnumber__icontains=query)
+
+    # Render the template with filtered data
+    return render(request, 'viewhosptransfer.html', {'data': am_id, 'query': query})
+
+def cancel(request, id):
+    location = get_object_or_404(Location, id=id)
+    if location.cancel != 1:
+        location.cancel = 1
+        location.save()
+    return redirect('viewhosptransfer')
+
+
+
+
+
+
+
+
+

@@ -79,7 +79,7 @@ class AmbulanceRegister(models.Model):
    vehicle_no=models.CharField(max_length=255)
    driver_name=models.CharField(max_length=255)
    driver_contact=models.CharField(max_length=15)
-   hosp_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='hosp_loginid')
+   hosp_id=models.ForeignKey('HospitalRegister',on_delete=models.CASCADE,related_name='hosp_loginid')
    amb_login_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='amb_login')
 
 class Location(models.Model):
@@ -90,3 +90,4 @@ class Location(models.Model):
    amb_login_id=models.ForeignKey('AmbulanceRegister',on_delete=models.CASCADE,related_name='amb_loginid',null=True)
    def __str__(self):
         return f"Location {self.location} ({self.latitude}, {self.longitude})"
+   cancel=models.IntegerField(default=0)
