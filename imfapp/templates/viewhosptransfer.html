@@ -1,0 +1,65 @@
+{% extends 'docheader.html' %}
+
+{% block content %}
+<center>
+    <form method="GET" action="">
+        <input type="search" name="q" placeholder="Search by MRnumber" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Search Results:</h2>
+    <table border="1" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>MR number</th>
+                <th>Location</th>
+                <th>Vehicle Category</th>
+                <th>Vehicle Type</th>
+                <th>Vehicle Number</th>
+                <th>Driver Name</th>
+                <th>Driver Contact</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if data %}
+                {% for a in data %}
+                    <tr>
+                        <td>{{ a.pat_id.patient_name }}</td>
+                        <td>{{ a.pat_id.address }}</td>
+                        <td>{{ a.pat_id.gender }}</td>
+                        <td>{{ a.pat_id.age }}</td>
+                        <td>{{ a.pat_id.patient_contact }}</td>
+                        <td>{{ a.pat_id.login_id.email }}</td>
+                        <td>{{ a.pat_id.MRnumber }}</td>
+                        <td>
+                            <!-- Create a link that will open the location in Google Maps -->
+                            <a href="https://www.google.com/maps?q={{ a.latitude }},{{ a.longitude }}" target="_blank">View Location on Google Maps</a>
+                        </td>
+                        <td>{{ a.amb_login_id.vehicle_category }}</td>
+                        <td>{{ a.amb_login_id.vehicle_type }}</td>
+                        <td>{{ a.amb_login_id.vehicle_no }}</td>
+                        <td>{{ a.amb_login_id.driver_name }}</td>
+                        <td>{{ a.amb_login_id.driver_contact }}</td>
+                        {% if a.cancel == 1 %}
+                        <td>Cancelled</td>
+                        {% else %}
+                        <td><a href="{% url 'cancel' a.id %}">CANCEL</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="13">No results found.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</center>
+{% endblock %}

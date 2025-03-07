@@ -11,7 +11,7 @@ urlpatterns = [
      path('hosphome',views.hosphome,name='hosphome'),
      path('hosp_reg',views.hosp_reg,name='hosp_reg'),
      path('doc_reg',views.doc_reg,name='doc_reg'),
-     path('view_doc',views.view_doc,name='view_doc'),
+     path('view_doc',views.view_doc,name='view_doc'), 
      path('adminhospview',views.adminhospview,name='adminhospview'),
      path('admindocview',views.admindocview,name='admindocview'),
      path('patient_reg',views.patient_reg,name='patient_reg'),
@@ -47,8 +47,17 @@ urlpatterns = [
      path('add_prescription/<int:id>/', views.add_prescription, name='add_prescription'),
      path('editprescription/<int:id>/',views.editprescription,name='editprescription'),
      path('delete_prescription/<int:id>/',views.delete_prescription,name='delete_prescription'),
+     path('viewhosptransfer',views.viewhosptransfer,name='viewhosptransfer'),
+     path('cancel/<int:id>/',views.cancel,name='cancel'),
      path('approve/<int:id>/',views.approve,name='approve'),
      path('reject/<int:id>/',views.reject,name='reject'),
+     path('notification',views.add_notification,name='notification'),
+     path('viewnotification',views.view_notification,name='viewnotification'),
+
+
+    
+      
+
 
 
 
