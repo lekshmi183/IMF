@@ -533,39 +533,6 @@ def delete_prescription(request,id):
     prescription.save()
     return redirect('viewappointment') 
 
-# def viewhosptransfer(request):
-#     hosp_id=request.session.get('hosp_id')
-#     hid=get_object_or_404(HospitalRegister,login_id=hosp_id)
-#     am_id=Location.objects.filter(amb_login_id__hosp_id=hid)
-#     query = request.GET.get('q', '') 
-
-#     if query:
-#         results = results.filter(
-#             Q(pat_id__icontains=query)  
-#         )
-#     return render(request,'viewhosptransfer.html',{'data':am_id})
-def viewhosptransfer(request):
-    hosp_id = request.session.get('hosp_id')
-    hid = get_object_or_404(HospitalRegister, login_id=hosp_id)
-    am_id = Location.objects.filter(amb_login_id__hosp_id=hid)
-
-    # Get the search query from GET parameters
-    query = request.GET.get('q', '')
-
-    if query:
-        # Filter results based on MRnumber
-        am_id = am_id.filter(pat_id__MRnumber__icontains=query)
-
-    # Render the template with filtered data
-    return render(request, 'viewhosptransfer.html', {'data': am_id, 'query': query})
-
-def cancel(request, id):
-    location = get_object_or_404(Location, id=id)
-    if location.cancel != 1:
-        location.cancel = 1
-        location.save()
-    return redirect('viewhosptransfer')
-
 def approve(request,id):
     a=get_object_or_404(Login,id=id)
     a.login_status=1
@@ -577,25 +544,3 @@ def reject(request,id):
     a.login_status=2
     a.save()
     return redirect('adminhospview')
-
-def add_notification(request):
-    hosp_id=request.session.get('hosp_id')
-    login_details = get_object_or_404(HospitalRegister, id=hosp_id)
-    if request.method=='POST': 
-        form1=notification_form(request.POST)
-        print(form1)
-        if form1.is_valid():
-            b=form1.save(commit=False)
-            b.hosp_id=login_details
-            b.save()
-            return redirect('hosphome')
-
-    else:
-        form1=notification_form()
-    return render(request,'notification.html',{'form': form1}) 
-
-def view_notification(request):
-    hosp_id=request.session.get('hosp_id')
-    nid=get_object_or_404(HospitalRegister,id=hosp_id)
-    notification_id=Notification.objects.filter(hosp_id=nid)
-    return render(request,'viewnotification.html',{'data':notification_id})

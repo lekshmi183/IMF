@@ -47,6 +47,7 @@ urlpatterns = [
      path('add_prescription/<int:id>/', views.add_prescription, name='add_prescription'),
      path('editprescription/<int:id>/',views.editprescription,name='editprescription'),
      path('delete_prescription/<int:id>/',views.delete_prescription,name='delete_prescription'),
+<<<<<<< HEAD
      path('viewhosptransfer',views.viewhosptransfer,name='viewhosptransfer'),
      path('cancel/<int:id>/',views.cancel,name='cancel'),
      path('approve/<int:id>/',views.approve,name='approve'),
@@ -58,6 +59,18 @@ urlpatterns = [
     
       
 
+=======
+<<<<<<< HEAD
+     path('viewhosptransfer',views.viewhosptransfer,name='viewhosptransfer'),
+     path('cancel/<int:id>/',views.cancel,name='cancel'),
+    
+      
+
+=======
+     path('approve/<int:id>/',views.approve,name='approve'),
+     path('reject/<int:id>/',views.reject,name='reject'),
+>>>>>>> ec64b50bae260c7f4359ed37499adbbc49c9d852
+>>>>>>> fed235f13b5ce72ef7e215d36e4b1ba0f0442aa4
 
 
 
