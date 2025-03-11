@@ -340,7 +340,7 @@ def refund(request,id,amount):
     return render(request,'refund.html',{'form': form1})        
 def amb_reg(request):
     id=request.session.get('hosp_id')
-    hid=get_object_or_404(HospitalRegister,login_id=id)
+    hid=get_object_or_404(Login,id=id)
     if request.method == 'POST':
         form = amb_form(request.POST)
         login = login_form(request.POST)
@@ -373,7 +373,7 @@ def ambhome(request):
 
 def view_amb(request):
     id=request.session.get('hosp_id')
-    hid=get_object_or_404(HospitalRegister,login_id=id)
+    hid=get_object_or_404(Login,id=id)
     amb_id=AmbulanceRegister.objects.filter(hosp_id=hid)
     return render(request,'viewamb.html',{'data':amb_id})
 
@@ -420,7 +420,7 @@ def viewtransferpatients(request):
 def viewambdata(request,id):
     pat_id=get_object_or_404(PatientRegister,id=id)
     hosp_id=request.session.get('hosp_id')
-    hid=get_object_or_404(HospitalRegister,login_id=hosp_id)
+    hid=get_object_or_404(Login,id=hosp_id)
     amb_id=AmbulanceRegister.objects.filter(hosp_id=hid)
     return render(request,'viewambdata.html',{'data':amb_id,'patient':pat_id})
 

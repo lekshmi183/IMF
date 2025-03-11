@@ -127,10 +127,3 @@ class prescription_form(forms.ModelForm):
         widget={
             'prescription':forms.TextInput(attrs={'class':'form-control'})
         }
-class notification_form(forms.ModelForm):
-    class Meta:
-        model=Notification
-        fields=['notification']
-        widget={
-            'notification':forms.TextInput(attrs={'class':'form-control'})
-        }
