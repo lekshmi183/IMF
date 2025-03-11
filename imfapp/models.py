@@ -27,7 +27,7 @@ class DoctorRegister(models.Model):
    doc_license=models.FileField(upload_to='license')
    hosp_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='hosp_id')
    doc_contact=models.CharField(max_length=15)
-   login_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='login_id')
+   login_id=models.OneToOneField('Login',on_delete=models.CASCADE,related_name='login_id')
    
 
 
@@ -71,7 +71,7 @@ class Appointment(models.Model):
 
 class Payment(models.Model):
     card_name=models.CharField(max_length=255)
-    card_number=models.IntegerField()
+    card_number=models.IntegerField() 
     cvv=models.IntegerField()
     amount=models.IntegerField()
     exp_date = models.CharField(max_length=255)

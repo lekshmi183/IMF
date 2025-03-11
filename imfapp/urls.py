@@ -12,6 +12,7 @@ urlpatterns = [
      path('hosp_reg',views.hosp_reg,name='hosp_reg'),
      path('doc_reg',views.doc_reg,name='doc_reg'),
      path('view_doc',views.view_doc,name='view_doc'),
+     path('view_doc',views.view_doc,name='view_doc'),
      path('adminhospview',views.adminhospview,name='adminhospview'),
      path('admindocview',views.admindocview,name='admindocview'),
      path('patient_reg',views.patient_reg,name='patient_reg'),
@@ -57,6 +58,11 @@ urlpatterns = [
      path('viewhospdata/<int:id>/',views.viewhospdata,name='viewhospdata'),
      path('transfer_store/<int:hid>/<int:pat_id>/',views.transfer_store,name='transfer_store'),
      path('viewtransferdetails',views.viewtransferdetails,name='viewtransferdetails'),
+     path('viewhosptransfer',views.viewhosptransfer,name='viewhosptransfer'),
+     path('cancel/<int:id>/',views.cancel,name='cancel'),
+     path('approve/<int:id>/',views.approve,name='approve'),
+     path('reject/<int:id>/',views.reject,name='reject'),
+
 
 
 

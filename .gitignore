@@ -12,7 +12,8 @@ ENV/
 # Ignore Django migrations
 */migrations/*
 
-# Ignore database files (SQLite default for development)
+# Ignore SQLite database files (default for Django)
+*.sqlite3
 
 # Ignore the cache folder (if using Django's caching mechanism)
 *.cache
@@ -39,5 +40,5 @@ nosetests.xml
 .idea/
 .vscode/
 
-# Ignore log files
+# Ignore log files 
 *.log

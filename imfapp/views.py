@@ -632,3 +632,13 @@ def viewtransferdetails(request):
 def viewrecords(request):
      hosp_id=request.session.get('hosp_id')
      rid=get_object_or_404(HospitalRegister,id=hosp_id)
+    hid=get_object_or_404(HospitalRegister,login_id_id=hosp_id)
+    data_id=Transfer.objects.filter(to_hosp_id=hid.id)
+    return render(request,'viewtransferdetails.html',{'data':data_id})
+
+def viewrecords(request,id):
+    pat_id =  get_object_or_404(PatientRegister,login_id=id)
+    appointments = Appointment.objects.filter(patient_id=pat_id.login_id).select_related('login_id__login_id')
+    return render(request, 'viewrecords.html', {'doctor_details': appointments})
+
+    
