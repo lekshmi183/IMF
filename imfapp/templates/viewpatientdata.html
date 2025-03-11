@@ -1,0 +1,47 @@
+{% extends 'hospheader.html' %}
+
+{% block content %}
+<center>
+    <form method="GET" action="">
+        <input type="search" name="q" placeholder="Search by MRnumber" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Search Results:</h2>
+    <table border="1" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>MR number</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if data %}
+                {% for a in data %}
+                    <tr>
+                        <td>{{ a.patient_name }}</td>
+                        <td>{{ a.address }}</td>
+                        <td>{{ a.gender }}</td>
+                        <td>{{ a.age }}</td>
+                        <td>{{ a.patient_contact }}</td>
+                        <td>{{ a.login_id.email }}</td>
+                        <td>{{ a.MRnumber }}</td>
+                        <td><a href="{% url 'viewhospdata' a.id %}">TRANSFER</a></td>
+                       
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="13">No results found.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</center>
+{% endblock %}

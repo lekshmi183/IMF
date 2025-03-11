@@ -11,6 +11,7 @@
     <table border="1" class="table table-striped">
         <thead>
             <tr>
+                <th>Hospital Name</th>
                 <th>Patient Name</th>
                 <th>Address</th>
                 <th>Gender</th>
@@ -18,19 +19,14 @@
                 <th>Contact</th>
                 <th>Email</th>
                 <th>MR number</th>
-                <th>Location</th>
-                <th>Vehicle Category</th>
-                <th>Vehicle Type</th>
-                <th>Vehicle Number</th>
-                <th>Driver Name</th>
-                <th>Driver Contact</th>
-                <th></th>
+                <th>Records</th>
             </tr>
         </thead>
         <tbody>
             {% if data %}
                 {% for a in data %}
                     <tr>
+                        <td>{{a.from_hosp_id.hosp_name}}</td>
                         <td>{{ a.pat_id.patient_name }}</td>
                         <td>{{ a.pat_id.address }}</td>
                         <td>{{ a.pat_id.gender }}</td>
@@ -38,26 +34,9 @@
                         <td>{{ a.pat_id.patient_contact }}</td>
                         <td>{{ a.pat_id.login_id.email }}</td>
                         <td>{{ a.pat_id.MRnumber }}</td>
-                        <td>
-                            <!-- Create a link that will open the location in Google Maps -->
-                            <a href="https://www.google.com/maps?q={{ a.latitude }},{{ a.longitude }}" target="_blank">View Location on Google Maps</a>
-                        </td>
-                        <td>{{ a.amb_login_id.vehicle_category }}</td>
-                        <td>{{ a.amb_login_id.vehicle_type }}</td>
-                        <td>{{ a.amb_login_id.vehicle_no }}</td>
-                        <td>{{ a.amb_login_id.driver_name }}</td>
-                        <td>{{ a.amb_login_id.driver_contact }}</td>
-                        {% if a.cancel == 1 %}
-                        <td>Cancelled</td>
-                        {% else %}
-                        <td><a href="{% url 'cancel' a.id %}">CANCEL</a></td>
-                        {% endif %}
+                        <td><a href="">VIEW RECORDS</a></td>
                     </tr>
                 {% endfor %}
-            {% else %}
-                <tr>
-                    <td colspan="13">No results found.</td>
-                </tr>
             {% endif %}
         </tbody>
     </table>

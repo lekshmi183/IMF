@@ -1,4 +1,4 @@
-{% extends 'ambheader.html' %}
+{% extends 'docheader.html' %}
 {% block content %}
 
 
@@ -8,10 +8,10 @@
             <th>Hospital Name</th>
             <th>Notification</th>
         </tr>
-        {% for b in data %}
+        {% for a in data %}
         <tr>
-        <td>{{b.hosp_id.hosp_name}}</td>
-        <td>{{b.notification}}</td>
+        <td>{{a.doctor_register.doc_name}}</td>
+        <td>{{a.prescription}}</td>
     </tr>
     {% endfor %}
     </table>

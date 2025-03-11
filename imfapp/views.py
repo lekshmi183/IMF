@@ -340,7 +340,7 @@ def refund(request,id,amount):
     return render(request,'refund.html',{'form': form1})        
 def amb_reg(request):
     id=request.session.get('hosp_id')
-    hid=get_object_or_404(HospitalRegister,login_id=id)
+    hid=get_object_or_404(Login,id=id)
     if request.method == 'POST':
         form = amb_form(request.POST)
         login = login_form(request.POST)
@@ -373,7 +373,7 @@ def ambhome(request):
 
 def view_amb(request):
     id=request.session.get('hosp_id')
-    hid=get_object_or_404(HospitalRegister,login_id=id)
+    hid=get_object_or_404(Login,id=id)
     amb_id=AmbulanceRegister.objects.filter(hosp_id=hid)
     return render(request,'viewamb.html',{'data':amb_id})
 
@@ -420,7 +420,7 @@ def viewtransferpatients(request):
 def viewambdata(request,id):
     pat_id=get_object_or_404(PatientRegister,id=id)
     hosp_id=request.session.get('hosp_id')
-    hid=get_object_or_404(HospitalRegister,login_id=hosp_id)
+    hid=get_object_or_404(Login,id=hosp_id)
     amb_id=AmbulanceRegister.objects.filter(hosp_id=hid)
     return render(request,'viewambdata.html',{'data':amb_id,'patient':pat_id})
 
@@ -533,6 +533,26 @@ def delete_prescription(request,id):
     prescription.save()
     return redirect('viewappointment') 
 
+def viewhosptransfer(request):
+    hosp_id = request.session.get('hosp_id')
+    print(hosp_id)
+    hid = get_object_or_404(Login, id=hosp_id)
+    am_id = Location.objects.filter(amb_login_id__hosp_id=hid)
+
+    query = request.GET.get('q', '')
+
+    if query:
+        am_id = am_id.filter(pat_id__MRnumber__icontains=query)
+
+    return render(request, 'viewhosptransfer.html', {'data': am_id, 'query': query})
+
+def cancel(request, id):
+    location = get_object_or_404(Location, id=id)
+    if location.cancel != 1:
+        location.cancel = 1
+        location.save()
+    return redirect('viewhosptransfer')
+
 def approve(request,id):
     a=get_object_or_404(Login,id=id)
     a.login_status=1
@@ -544,3 +564,71 @@ def reject(request,id):
     a.login_status=2
     a.save()
     return redirect('adminhospview')
+
+
+def viewpatientdata(request):
+    hosp_id = request.session.get('hosp_id')
+    hid = get_object_or_404(HospitalRegister, login_id=hosp_id)
+    pat_data = PatientRegister.objects.all()
+    query = request.GET.get('q', '')
+    if query:
+        pat_data = PatientRegister.objects.filter(MRnumber__icontains=query)
+    return render(request, 'viewpatientdata.html', {'data': pat_data, 'query': query})
+
+
+def viewhospdata(request, id):
+    hosp_id = request.session.get('hosp_id')
+    pat_id = get_object_or_404(PatientRegister, id=id)
+    hid = get_object_or_404(HospitalRegister, login_id=hosp_id)
+    hosp_data = HospitalRegister.objects.all()
+    query = request.GET.get('q', '')
+    if query:
+        hosp_data = hosp_data.filter(hosp_name__icontains=query)
+        hosp_data = hosp_data.exclude(id=hid.id)
+    return render(request, 'viewhospdata.html', {'data': hosp_data, 'query': query, 'patient': pat_id})
+
+def transfer_store(request, hid, pat_id):
+    pat_id = get_object_or_404(PatientRegister, id=pat_id)
+    hid = get_object_or_404(HospitalRegister, id=hid)
+    hosp_id = request.session.get('hosp_id')
+    hid2 = get_object_or_404(HospitalRegister, login_id=hosp_id)
+    
+    Transfer.objects.create(
+        from_hosp_id=hid2,
+        to_hosp_id=hid,
+        pat_id=pat_id
+    )
+    
+    return redirect('hosphome')
+
+def add_notification(request):
+    hosp_id=request.session.get('hosp_id')
+    login_details = get_object_or_404(HospitalRegister, login_id=hosp_id)
+    if request.method=='POST': 
+        form1=notification_form(request.POST)
+        print(form1)
+        if form1.is_valid():
+            b=form1.save(commit=False)
+            b.hosp_id=login_details
+            b.save()
+            return redirect('hosphome')
+
+    else:
+        form1=notification_form()
+    return render(request,'notification.html',{'form': form1}) 
+
+def view_notification(request):
+    hosp_id=request.session.get('hosp_id')
+    nid=get_object_or_404(HospitalRegister,id=hosp_id)
+    notification_id=Notification.objects.filter(hosp_id=nid)
+    return render(request,'viewnotification.html',{'data':notification_id})
+
+def viewtransferdetails(request):
+    hosp_id = request.session.get('hosp_id')
+    hid=get_object_or_404(HospitalRegister,id=hosp_id)
+    data_id=Transfer.objects.filter(to_hosp_id=hid)
+    return render(request,'viewtransferdetails.html',{'data':data_id})
+
+def viewrecords(request):
+     hosp_id=request.session.get('hosp_id')
+     rid=get_object_or_404(HospitalRegister,id=hosp_id)
