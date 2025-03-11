@@ -1,0 +1,23 @@
+
+    <h2>Appointment Records</h2>
+    <table border="1" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Doctor Name</th>
+                <th>Department</th>
+                <th>Prescription</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in doctor_details %}
+                <tr>
+                    <td>{{ detail.login_id.login_id.doc_name }}</td> 
+                    <td>{{ detail.login_id.login_id.department }}</td>
+                    <td>{{ detail.prescription }}</td>
+                   
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</center>

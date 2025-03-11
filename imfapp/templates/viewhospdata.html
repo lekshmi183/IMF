@@ -1,0 +1,46 @@
+{% extends 'docheader.html' %}
+
+{% block content %}
+<center>
+    <form method="GET" action="">
+        <input type="search" name="q" placeholder="Search " value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Search Results:</h2>
+    <table border="1" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Hospital Name</th>
+                                                <th>Address</th>
+                                                <th>City</th>
+                                                <th>District</th>
+                                                <th>State</th>
+                                                <th>Contact</th>
+                                                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if data %}
+                {% for a in data %}
+                    <tr>
+                        <td>{{a.hosp_name}}</td>
+                        <td>{{a.hosp_address}}</td>
+                        <td>{{a.hosp_city}}</td>
+                        <td>{{a.hosp_district}}</td>
+                        <td>{{a.hosp_state}}</td>
+                        <td>{{a.hosp_contact}}</td>
+                        <td>{{a.login_id.email}}</td>
+                        <td><a href="{% url 'transfer_store' hid=a.id  pat_id=patient.id %}">TRANSFER NOW!</a></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="13">No results found.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</center>
+{% endblock %}

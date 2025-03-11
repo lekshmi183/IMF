@@ -1,0 +1,19 @@
+{% extends 'docheader.html' %}
+{% block content %}
+
+
+<center>
+    <table border="1" class="table table-stripped">
+        <tr>
+            <th>Hospital Name</th>
+            <th>Notification</th>
+        </tr>
+        {% for b in data %}
+        <tr>
+        <td>{{b.hosp_id.hosp_name}}</td>
+        <td>{{b.notification}}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    
+{% endblock %}

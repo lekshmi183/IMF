@@ -81,21 +81,30 @@
                          </li>
                          <li class="nav-item dropdown pr-lg-0">
                            <a class="nav-link dropdown-toggle p-0 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Patient Transfer
+                             Shelter Transfer
                            </a>
                            <div class="dropdown-menu p-0" aria-labelledby="navbarDropdown">
                              <a class="dropdown-item" href="{% url 'viewtransferpatients' %}">Add Transfer</a>
-                             <a class="dropdown-item" href="">View Transfer</a>
+                             <a class="dropdown-item" href="{% url 'viewhosptransfer' %}">View Transfer</a>
+                           </div>
+                         </li>
+                         <li class="nav-item dropdown pr-lg-0">
+                           <a class="nav-link dropdown-toggle p-0 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Hospital Transfer
+                           </a>
+                           <div class="dropdown-menu p-0" aria-labelledby="navbarDropdown">
+                             <a class="dropdown-item" href="{% url 'viewpatientdata' %}">Add Transfer</a>
+                             <a class="dropdown-item" href="{% url 'viewtransferdetails' %}">View Transfer</a>
                            </div>
                          </li>
                          <li class="nav-item">
-                           <a class="nav-link p-0 text-white" href="contact.html"> Contact </a>
+                           <a class="nav-link p-0 text-white" href="{% url 'notification' %}">Notification</a>
                         </li>
                      </ul>
-                     <a href="tel:+12345678" class="navbar-btn text-white">
+                     <!-- <a href="tel:+12345678" class="navbar-btn text-white">
                      <i class="fas fa-phone-volume"></i>
                      +1 234 56 78
-                     </a>
+                     </a> -->
                   </div>
                </nav>
                <!-- navbar-end -->

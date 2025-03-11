@@ -27,7 +27,7 @@ class DoctorRegister(models.Model):
    doc_license=models.FileField(upload_to='license')
    hosp_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='hosp_id')
    doc_contact=models.CharField(max_length=15)
-   login_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='login_id')
+   login_id=models.OneToOneField('Login',on_delete=models.CASCADE,related_name='login_id')
    
 
 
@@ -71,7 +71,7 @@ class Appointment(models.Model):
 
 class Payment(models.Model):
     card_name=models.CharField(max_length=255)
-    card_number=models.IntegerField()
+    card_number=models.IntegerField() 
     cvv=models.IntegerField()
     amount=models.IntegerField()
     exp_date = models.CharField(max_length=255)
@@ -96,3 +96,13 @@ class Location(models.Model):
    amb_login_id=models.ForeignKey('AmbulanceRegister',on_delete=models.CASCADE,related_name='amb_loginid',null=True)
    def __str__(self):
         return f"Location {self.location} ({self.latitude}, {self.longitude})"
+
+class Transfer(models.Model):
+    from_hosp_id=models.ForeignKey('HospitalRegister',on_delete=models.CASCADE,related_name='from_hosp_loginid')
+    to_hosp_id=models.ForeignKey('HospitalRegister',on_delete=models.CASCADE,related_name='to_hosp_loginid')
+    pat_id=models.ForeignKey('PatientRegister',on_delete=models.CASCADE,related_name='patient_loginid',null=True)
+    current_date = models.DateTimeField(auto_now_add=True)
+
+class Notification(models.Model):
+    notification=models.CharField(max_length=100)
+    hosp_id=models.ForeignKey('HospitalRegister',on_delete=models.CASCADE,related_name='hospital_loginid')

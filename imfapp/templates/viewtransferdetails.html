@@ -1,0 +1,44 @@
+{% extends 'docheader.html' %}
+
+{% block content %}
+<center>
+    <form method="GET" action="">
+        <input type="search" name="q" placeholder="Search by MRnumber" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Search Results:</h2>
+    <table border="1" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Hospital Name</th>
+                <th>Patient Name</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>MR number</th>
+                <th>Records</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if data %}
+                {% for a in data %}
+                    <tr>
+                        <td>{{a.from_hosp_id.hosp_name}}</td>
+                        <td>{{ a.pat_id.patient_name }}</td>
+                        <td>{{ a.pat_id.address }}</td>
+                        <td>{{ a.pat_id.gender }}</td>
+                        <td>{{ a.pat_id.age }}</td>
+                        <td>{{ a.pat_id.patient_contact }}</td>
+                        <td>{{ a.pat_id.login_id.email }}</td>
+                        <td>{{ a.pat_id.MRnumber }}</td>
+                        <td><a href="{% url 'viewrecords' a.pat_id.login_id.id %}">VIEW RECORDS</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</center>
+{% endblock %}
