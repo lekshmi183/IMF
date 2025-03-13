@@ -1,0 +1,63 @@
+{% extends 'patientheader.html' %}
+{% block content %}
+<center>
+    <button type="button" id="location">Track Location</button>
+</center>
+
+<p id="location-info"></p>
+
+<script>
+// Get CSRF token from the cookie (this assumes you're using Django's default CSRF setup)
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Attach the CSRF token header to the AJAX request
+const csrfToken = getCookie('csrftoken');
+
+document.getElementById('location').onclick = function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            // Get the latitude and longitude from the position object
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Show the latitude and longitude on the page
+            document.getElementById('location-info').innerHTML = 
+                'Latitude: ' + latitude + ', Longitude: ' + longitude;
+
+            // Send the latitude and longitude to the server
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/track-location/', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-CSRFToken', csrfToken);  // Include CSRF token in header
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    console.log('Location data saved');
+                }
+            };
+
+            // Send the data as JSON
+            xhr.send(JSON.stringify({
+                latitude: latitude,
+                longitude: longitude
+            }));
+        });
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+</script>
+{% endblock %}

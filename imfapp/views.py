@@ -23,6 +23,8 @@ def hosp_reg(request):
             a.save()
             b=form.save(commit=False)
             b.login_id=a
+            b.latitude = request.POST.get('latitude', '')  # Get latitude from form
+            b.longitude = request.POST.get('longitude', '')  
             b.save()
             messages.success(request,"Form succesfully submitted")
             return redirect('mainindex')
@@ -30,6 +32,7 @@ def hosp_reg(request):
         form=hosp_form()
         login=login_form()
     return render(request,'hospitalreg.html',{'form':form,'login':login})
+
 
 def hosphome(request):
     return render(request,'hosphome.html')
@@ -203,7 +206,9 @@ def search(request):
             'hosp_district': hospital.hosp_district,
             'hosp_state': hospital.hosp_state,  
             'hosp_address': hospital.hosp_address,
-            'hosp_contact':hospital.hosp_contact
+            'hosp_contact':hospital.hosp_contact,
+            'hosp_id':hospital.id,
+
 
 
         } for hospital in hospitals]
@@ -689,3 +694,157 @@ def save_appointment_url(request, id):
 
     return JsonResponse({'success': False, 'message': 'Invalid request'}, status=400)
 
+# def viewrecords(request,id):
+#     pat_id =  get_object_or_404(PatientRegister,login_id=id)
+#     appointments = Appointment.objects.filter(patient_id=pat_id.login_id).select_related('login_id__login_id')
+#     return render(request, 'viewrecords.html', {'doctor_details': appointments})
+
+# def emerencynotify(request):
+#     hosp_id = request.session.get('hosp_id')g
+#     print(hosp_id)
+#     pat_id =  get_object_or_404(PatientRegister,login_id=id)
+#     hid = get_object_or_404(Login, id=hosp_id)
+#     am_id = Location.objects.filter(amb_login_id__hosp_id=hid)
+
+#     query = request.GET.get('q', '')
+
+#     if query:
+#         am_id = am_id.filter(pat_id__MRnumber__icontains=query)
+
+#     return render(request, 'viewhosptransfer.html', {'data': am_id, 'query': query})
+
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from .models import EmergencyNotify, HospitalRegister
+from django.contrib.auth.models import User
+import json
+
+# def track_location(request, hospital_id):
+#     if request.method == 'POST':
+#         try:
+#             # Get the hospital and patient from the database
+#             hospital = get_object_or_404(HospitalRegister, id=hospital_id)
+
+#             # Assuming the patient is the logged-in user, you can adjust as per your application logic
+#             patient = request.session.get('patient_id')  # Adjust this based on how your system identifies patients
+
+#             # Parse the latitude and longitude from the request body
+#             data = json.loads(request.body)
+#             latitude = data.get('latitude')
+#             longitude = data.get('longitude')
+
+#             # Create a new EmergencyNotify record
+#             emergency_notify = EmergencyNotify(
+#                 hosp_id=hospital,
+#                 pat_id=patient,
+#                 latitude=latitude,
+#                 longitude=longitude
+#             )
+#             emergency_notify.save()
+
+#             return JsonResponse({'status': 'success', 'message': 'Location saved successfully.'})
+
+#         except Exception as e:
+#             return JsonResponse({'status': 'error', 'message': str(e)})
+
+#     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from .models import EmergencyNotify, HospitalRegister
+from django.contrib.auth.models import User
+import json
+
+def track_location(request, hospital_id):
+    if request.method == 'POST':
+        try:
+            # Get the hospital using the hospital_id from the URL
+            hospital = get_object_or_404(HospitalRegister, id=hospital_id)
+
+            # Assuming the patient is the logged-in user, adjust if needed based on how you manage patients
+            patient = request.session.get('patient_id')  # If PatientRegister is linked to the User model
+            
+            if not patient:
+                return JsonResponse({'status': 'error', 'message': 'Patient not found.'})
+            
+            # Parse the latitude and longitude from the request body
+            data = json.loads(request.body)
+            latitude = data.get('latitude')
+            longitude = data.get('longitude')
+
+            if latitude is None or longitude is None:
+                return JsonResponse({'status': 'error', 'message': 'Latitude and longitude are required.'})
+
+            # Create a new EmergencyNotify record
+            emergency_notify = EmergencyNotify(
+                hosp_id=hospital,
+                pat_id=patient,
+                latitude=latitude,
+                longitude=longitude
+            )
+            emergency_notify.save()
+
+            return JsonResponse({'status': 'success', 'message': 'Location saved successfully.'})
+
+        except Exception as e:
+            # Log the exception for debugging
+            print(f"Error: {e}")
+            return JsonResponse({'status': 'error', 'message': str(e)})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+
+
+import json
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from .models import PatientRegister, HospitalRegister, EmergencyNotify
+
+@csrf_exempt
+def store_location(request):
+    pat = request.session.get('patient_id')
+    
+    if request.method == "POST":
+        try:
+            raw_body = request.body.decode("utf-8")  # Decode body to string
+            print("Received JSON:", raw_body)  # Debugging log
+            
+            data = json.loads(raw_body)
+            hosp_id = data.get("hosp_id")
+            latitude = data.get("latitude")
+            longitude = data.get("longitude")
+
+            if not all([hosp_id, latitude, longitude]):  # Ensure data is present
+                return JsonResponse({"success": False, "error": "Missing required data"}, status=400)
+
+            # Get the logged-in patient
+            patient = get_object_or_404(PatientRegister, login_id=pat)
+            print(patient)
+
+            # Get the hospital instance
+            hospital = get_object_or_404(HospitalRegister, id=hosp_id)
+
+            # Save location to the database
+            EmergencyNotify.objects.create(
+                hosp_id=hospital,
+                pat_id=patient,
+                latitude=latitude,
+                longitude=longitude
+            )
+
+            return JsonResponse({"success": True, "message": "Location stored successfully!"})
+        
+        except json.JSONDecodeError:
+            return JsonResponse({"success": False, "error": "Invalid JSON format"}, status=400)
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)}, status=400)
+
+    return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+def viewalert(request):
+    hosp_id=request.session.get('hosp_id')
+    hid = get_object_or_404(HospitalRegister,login_id=hosp_id)
+    alert_id=EmergencyNotify.objects.filter(hosp_id=hid)
+    return render(request,'viewalert.html',{'data':alert_id})
+
+#   
