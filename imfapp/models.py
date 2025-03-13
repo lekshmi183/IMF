@@ -8,7 +8,9 @@ class HospitalRegister(models.Model):
     hosp_state=models.CharField(max_length=100)
     hosp_contact=models.CharField(max_length=15)
     login_id=models.ForeignKey('Login',on_delete=models.CASCADE)
-    
+    latitude=models.CharField(max_length=100)
+    longitude=models.CharField(max_length=100)
+
 
    
 class Login(models.Model):
@@ -106,3 +108,11 @@ class Transfer(models.Model):
 class Notification(models.Model):
     notification=models.CharField(max_length=100)
     hosp_id=models.ForeignKey('HospitalRegister',on_delete=models.CASCADE,related_name='hospital_loginid')
+
+class EmergencyNotify(models.Model):
+    hosp_id=models.ForeignKey('HospitalRegister',on_delete=models.CASCADE,related_name='hospitals_loginid',null=True)
+    pat_id=models.ForeignKey('PatientRegister',on_delete=models.CASCADE,related_name='patients_loginid',null=True)
+    latitude = models.FloatField()  # Store the latitude of the selected location
+    longitude = models.FloatField() 
+    current_date = models.DateTimeField(auto_now_add=True)
+

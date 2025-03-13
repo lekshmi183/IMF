@@ -62,6 +62,12 @@ urlpatterns = [
      path('cancel/<int:id>/',views.cancel,name='cancel'),
      path('approve/<int:id>/',views.approve,name='approve'),
      path('reject/<int:id>/',views.reject,name='reject'),
+    #  path('viewrecords/<int:id>/',views.viewrecords,name='viewrecords'),
+     path('track-location/<int:hospital_id>/', views.track_location, name='trackloc'),
+     path("store_location/", views.store_location, name="store_location"),
+     path("viewalert", views.viewalert, name="viewalert"),
+
+
 
 
 
