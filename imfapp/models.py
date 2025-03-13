@@ -67,6 +67,9 @@ class Appointment(models.Model):
     refund_status=models.IntegerField(default=0)
     prescription=models.CharField(max_length=100)
     prescription_status=models.IntegerField(default=0)
+    url=models.CharField(max_length=100)
+
+    
     
 
 class Payment(models.Model):

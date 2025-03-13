@@ -4,6 +4,7 @@ from.forms import *
 from.models import *
 from django.db.models import Q
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -576,16 +577,39 @@ def viewpatientdata(request):
     return render(request, 'viewpatientdata.html', {'data': pat_data, 'query': query})
 
 
+# def viewhospdata(request, id):
+#     hosp_id = request.session.get('hosp_id')
+#     pat_id = get_object_or_404(PatientRegister, id=id)
+#     hid = get_object_or_404(HospitalRegister, login_id=hosp_id)
+#     hosp_data = HospitalRegister.objects.all()
+#     query = request.GET.get('q', '')
+#     if query:
+#         hosp_data = hosp_data.filter(hosp_name__icontains=query)
+#         hosp_data = hosp_data.exclude(id=hid.id)
+#     return render(request, 'viewhospdata.html', {'data': hosp_data, 'query': query, 'patient': pat_id})
+# def viewhospdata(request, id):
+#     hosp_id = request.session.get('hosp_id')
+#     pat_id = get_object_or_404(PatientRegister, id=id)
+#     hid = get_object_or_404(HospitalRegister, login_id=hosp_id)
+#     hosp_data = HospitalRegister.objects.all()
+#     query = request.GET.get('q', '')
+#     if query:
+#         hosp_data = hosp_data.filter(hosp_name__icontains=query)
+#         hosp_data = hosp_data.exclude(id=hid.id)
+#     return render(request, 'viewhospdata.html', {'data': hosp_data, 'query': query, 'patient': pat_id})
 def viewhospdata(request, id):
     hosp_id = request.session.get('hosp_id')
     pat_id = get_object_or_404(PatientRegister, id=id)
     hid = get_object_or_404(HospitalRegister, login_id=hosp_id)
-    hosp_data = HospitalRegister.objects.all()
+    
+    hosp_data = HospitalRegister.objects.exclude(id=hid.id)
+    
     query = request.GET.get('q', '')
     if query:
         hosp_data = hosp_data.filter(hosp_name__icontains=query)
-        hosp_data = hosp_data.exclude(id=hid.id)
+    
     return render(request, 'viewhospdata.html', {'data': hosp_data, 'query': query, 'patient': pat_id})
+
 
 def transfer_store(request, hid, pat_id):
     pat_id = get_object_or_404(PatientRegister, id=pat_id)
@@ -629,16 +653,39 @@ def viewtransferdetails(request):
     data_id=Transfer.objects.filter(to_hosp_id=hid)
     return render(request,'viewtransferdetails.html',{'data':data_id})
 
-def viewrecords(request):
-     hosp_id=request.session.get('hosp_id')
-     rid=get_object_or_404(HospitalRegister,id=hosp_id)
-    hid=get_object_or_404(HospitalRegister,login_id_id=hosp_id)
-    data_id=Transfer.objects.filter(to_hosp_id=hid.id)
-    return render(request,'viewtransferdetails.html',{'data':data_id})
+# def viewrecords(request):
+#     hosp_id=request.session.get('hosp_id')
+#     rid=get_object_or_404(HospitalRegister,id=hosp_id)
+#     hid=get_object_or_404(HospitalRegister,login_id_id=hosp_id)
+#     data_id=Transfer.objects.filter(to_hosp_id=hid.id)
+#     return render(request,'viewtransferdetails.html',{'data':data_id})
 
 def viewrecords(request,id):
-    pat_id =  get_object_or_404(PatientRegister,login_id=id)
+    pat_id =  get_object_or_404(PatientRegister,id=id)
     appointments = Appointment.objects.filter(patient_id=pat_id.login_id).select_related('login_id__login_id')
     return render(request, 'viewrecords.html', {'doctor_details': appointments})
 
+def vidconference(request,id):
+    sid=get_object_or_404(Appointment,id=id)
+    return render(request,'vidconference.html',{'form':sid})   
+
     
+@csrf_exempt  
+def save_appointment_url(request, id):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        url = data.get('url')
+
+        if url:
+            appointment = get_object_or_404(Appointment, id=id)
+            
+            appointment.url = url
+            
+            appointment.save()
+
+            return JsonResponse({'success': True, 'message': 'URL saved successfully'})
+
+        return JsonResponse({'success': False, 'message': 'No URL provided'}, status=400)
+
+    return JsonResponse({'success': False, 'message': 'Invalid request'}, status=400)
+

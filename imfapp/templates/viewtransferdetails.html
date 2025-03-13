@@ -34,7 +34,7 @@
                         <td>{{ a.pat_id.patient_contact }}</td>
                         <td>{{ a.pat_id.login_id.email }}</td>
                         <td>{{ a.pat_id.MRnumber }}</td>
-                        <td><a href="">VIEW RECORDS</a></td>
+                        <td><a href="{% url 'viewrecords' a.pat_id.id %}">VIEW RECORDS</a></td>
                     </tr>
                 {% endfor %}
             {% endif %}

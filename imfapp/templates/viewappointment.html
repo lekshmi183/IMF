@@ -40,6 +40,7 @@
                 {% endif %}
             <td><a href="{% url 'editprescription' appointment.id %}">EDIT</a></td>
             <td><a href="{% url 'delete_prescription' appointment.id %}">DELETE</a></td>
+            <td><a href="{% url 'vidconference' appointment.id %}">VIDEO CONFERENCE</a></td>
         </tr>
         {% empty %}
         <tr>
