@@ -85,6 +85,21 @@
                                 {{login.password}}
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                                <button type="button" class="btn btn-primary" onclick="getLocation()">Get Location</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                                <label>Latitude</label>
+                                <input type="text" id="latitude" name="latitude" class="form-control" readonly>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <label>Longitude</label>
+                                <input type="text" id="longitude" name="longitude" class="form-control" readonly>
+                            </div>
+                        </div>
                             <!-- <div class="row">
                                 <div class="col-12">
                                     <textarea class="form-control" placeholder="Your proposal"></textarea>
@@ -106,6 +121,20 @@
             </div>
         </div>
     </div>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    document.getElementById("latitude").value = position.coords.latitude;
+                    document.getElementById("longitude").value = position.coords.longitude;
+                }, function(error) {
+                    alert("Error getting location: " + error.message);
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+    </script>
 <script src="{% static 'reg/js/jquery.min.js' %}"></script>
 <script src="{% static 'reg/js/popper.min.js' %}"></script>
 <script src="{% static 'reg/js/bootstrap.bundle.min.js' %}"></script>

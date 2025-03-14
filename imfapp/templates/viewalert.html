@@ -1,0 +1,32 @@
+{% extends 'ambheader.html' %}
+{% block content %}
+
+
+<center>
+    <table border="1" class="table table-stripped">
+        <tr>
+            <th>Patient Name</th>
+            <th>Address</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Location</th>
+        </tr>
+        {% for a in data %}
+        <tr>
+                <td>{{a.pat_id.patient_name}}</td>
+                <td>{{a.pat_id.address}}</td>
+                <td>{{a.pat_id.gender}}</td>
+                <td>{{a.pat_id.age}}</td>
+                <td>{{a.pat_id.patient_contact}}</td>
+                <td>{{a.pat_id.login_id.email}}</td>
+                <td>
+                    <!-- Create a link that will open the location in Google Maps -->
+                        <a href="https://www.google.com/maps?q={{ a.latitude }},{{ a.longitude }}" target="_blank">View Location on Google Maps</a>
+                </td>
+    </tr>
+    {% endfor %}
+    </table>
+    
+{% endblock %}

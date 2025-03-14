@@ -864,6 +864,9 @@
                     <td>${hospital.hosp_address}</td>
                     <td>${hospital.hosp_contact}</td>
                     <td><button  type="button" class=""><a href="{% url 'departmentsearch' %}">Doctor's List</a></button></td>
+                    <button type="button" id="track-location-btn-${hospital.hosp_id}" data-hospital-id="${hospital.hosp_id}">
+                Track Location
+            </button>        
                   `;
                   resultTable.appendChild(row);
                 });
@@ -882,6 +885,75 @@
             });
         }
       }
+      document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("resultTable").addEventListener("click", function (event) {
+        if (event.target && event.target.matches("button[id^='track-location-btn-']")) {
+            let hospitalId = event.target.getAttribute("data-hospital-id");
+
+            if (!hospitalId || hospitalId === "undefined") {
+                console.error("Hospital ID is missing.");
+                alert("Error: Hospital ID is missing.");
+                return;
+            }
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        let latitude = position.coords.latitude;
+                        let longitude = position.coords.longitude;
+
+                        console.log("Sending data:", { hosp_id: hospitalId, latitude, longitude });
+
+                        fetch("/store_location/", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRFToken": getCSRFToken(),
+                            },
+                            body: JSON.stringify({
+                                hosp_id: hospitalId,
+                                latitude: latitude,
+                                longitude: longitude
+                            }),
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log("Response:", data);
+                            if (data.success) {
+                                alert("Location saved successfully!");
+                            } else {
+                                alert("Error saving location: " + data.error);
+                            }
+                        })
+                        .catch((error) => console.error("Error:", error));
+                    },
+                    function (error) {
+                        console.error("Error getting location:", error);
+                        alert("Failed to get location. Please enable GPS.");
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+    });
+});
+
+
+// Function to get CSRF token from cookies
+function getCSRFToken() {
+    let name = "csrftoken=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let cookies = decodedCookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+    return "";
+}
+
     </script>
        
 <!-- Mirrored from html.designingmedia.com/medtech/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2025 07:10:32 GMT -->
