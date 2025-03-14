@@ -850,6 +850,21 @@ def viewalert(request):
     alert_id=EmergencyNotify.objects.filter(hosp_id=hid)
     return render(request,'viewalert.html',{'data':alert_id})
 
+
 def upload(request):
-    return render(request,'upload.html',{}) 
+    if request.method == 'POST':
+        form = upload_form(request.POST, request.FILES)  
+        if form.is_valid():
+            uploaded_file = form.cleaned_data['file']
+            
+            with open(f"some_path/{uploaded_file.name}", 'wb') as f:
+                for chunk in uploaded_file.chunks():
+                    f.write(chunk)
+            
+            return render(request, 'upload.html', {'form': form, 'message': 'File uploaded successfully!'})
+    else:
+        form = upload_form()  
+
+    return render(request, 'upload.html', {'form': form})
+
 #   

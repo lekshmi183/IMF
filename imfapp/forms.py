@@ -138,5 +138,5 @@ class upload_form(forms.ModelForm):
     class Meta:
         fields=['upload']
         widget={
-            'upload':forms.TextInput(attrs={'class':'form-control'})
+            'upload':forms.FileInput(attrs={'class':'form-control'})
         }
