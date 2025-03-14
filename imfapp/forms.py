@@ -134,4 +134,9 @@ class notification_form(forms.ModelForm):
         widget={
             'notification':forms.TextInput(attrs={'class':'form-control'})
         }
-
+class upload_form(forms.ModelForm):
+    class Meta:
+        fields=['upload']
+        widget={
+            'upload':forms.TextInput(attrs={'class':'form-control'})
+        }

@@ -254,8 +254,11 @@ def viewappointment(request):
     appointments = Appointment.objects.filter(login_id=doctor,payment_status=1)
     
     for appointment in appointments:
-        appointment.patient_register = PatientRegister.objects.get(login_id=appointment.patient_id)  
-    return render(request, 'viewappointment.html', {'appointments': appointments,'fee':fee})
+        try:
+            appointment.patient_register = PatientRegister.objects.get(login_id=appointment.patient_id)
+        except PatientRegister.DoesNotExist:
+            appointment.patient_register = None    
+        return render(request, 'viewappointment.html', {'appointments': appointments,'fee':fee})
 
 def viewapp(request):
     patient_id = request.session.get('patient_id')
@@ -847,4 +850,6 @@ def viewalert(request):
     alert_id=EmergencyNotify.objects.filter(hosp_id=hid)
     return render(request,'viewalert.html',{'data':alert_id})
 
+def upload(request):
+    return render(request,'upload.html',{}) 
 #   
