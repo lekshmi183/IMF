@@ -58,10 +58,10 @@ urlpatterns = [
      path('viewhospdata/<int:id>/',views.viewhospdata,name='viewhospdata'),
      path('transfer_store/<int:hid>/<int:pat_id>/',views.transfer_store,name='transfer_store'),
      path('viewtransferdetails',views.viewtransferdetails,name='viewtransferdetails'),
-     path('viewhosptransfer',views.viewhosptransfer,name='viewhosptransfer'),
-     path('cancel/<int:id>/',views.cancel,name='cancel'),
-     path('approve/<int:id>/',views.approve,name='approve'),
-     path('reject/<int:id>/',views.reject,name='reject'),
+     path('viewrecords/<int:id>',views.viewrecords,name='viewrecords'),
+     path('vidconference/<int:id>',views.vidconference,name='vidconference'),
+     path('save-appointment-url/<int:id>/', views.save_appointment_url, name='save_appointment_url'),    
+    
 
 
 

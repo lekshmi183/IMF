@@ -3,20 +3,7 @@
 
 
 <center>
-    <table border="1" class="table table-stripped">
-        <tr>
-            <th>Hospital Name</th>
-            <th>Notification</th>
-        </tr>
-        {% for a in data %}
-        <tr>
-        <td>{{a.doctor_register.doc_name}}</td>
-        <td>{{a.prescription}}</td>
-    </tr>
-    {% endfor %}
-    </table>
     
-{% endblock %}
 
     <h2>Appointment Records</h2>
     <table border="1" class="table table-striped">
@@ -40,3 +27,4 @@
         </tbody>
     </table>
 </center>
+{% endblock %}

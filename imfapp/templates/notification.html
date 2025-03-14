@@ -1,4 +1,4 @@
-{% extends 'ambheader.html' %}
+{% extends 'hospheader.html' %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -7,25 +7,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Notification</title>
-    <title>Add Notification</title>
 </head>
 <body>
-    <form action=" " method="POST">
+    <center>
     <form action=" " method="POST">
     <div class="row">
-        <div class="col-12 col-sm-6">ADD Notification</div>
         <div class="col-12 col-sm-6">ADD Notification</div>
             {% csrf_token %}
             {{form.as_p}}
         </div>
-        <tr>
-        
-        </tr>
-        
-        </tr>
+</form>
         <input type="submit" value="Submit" class="btn btn-primary">
-    </form>
-    </body>
+</center>
     </body>
 </html>
 {% endblock %}
