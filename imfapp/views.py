@@ -10,8 +10,17 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def mainindex(request):
     return render(request,'mainindex.html')
+
 def admin(request):
-    return render(request,'admin.html')   
+    a=HospitalRegister.objects.count()
+    print(a)
+    b=PatientRegister.objects.count()
+    print(b)
+    c=DoctorRegister.objects.count()
+    print(c)
+    d=AmbulanceRegister.objects.count()
+    print(d)
+    return render(request,'admin.html',{'a':a ,'b':b,'c':c, 'd':d})   
 
 def hosp_reg(request):
     if request.method == 'POST':
@@ -426,12 +435,36 @@ def viewtransferpatients(request):
     view_id=PatientRegister.objects.all()
     return render(request,'viewtransferpatients.html',{'data':view_id}) 
 
-def viewambdata(request,id):
-    pat_id=get_object_or_404(PatientRegister,id=id)
-    hosp_id=request.session.get('hosp_id')
-    hid=get_object_or_404(Login,id=hosp_id)
-    amb_id=AmbulanceRegister.objects.filter(hosp_id=hid)
-    return render(request,'viewambdata.html',{'data':amb_id,'patient':pat_id})
+# def viewambdata(request,id):
+#     pat_id=get_object_or_404(PatientRegister,id=id)
+#     hosp_id=request.session.get('hosp_id')
+#     hid=get_object_or_404(Login,id=hosp_id)
+#     amb_id=AmbulanceRegister.objects.filter(hosp_id=hid)
+#     a=[]
+#     for b in amb_id:
+#         a=Location.objects.filter(amb_login_id= b.id,complete_status=0)
+#         print(a)
+#     return render(request,'viewambdata.html',{'data':amb_id,'patient':pat_id})
+
+def viewambdata(request, id):
+    pat_id = get_object_or_404(PatientRegister, id=id)
+    hosp_id = request.session.get('hosp_id')
+    hid = get_object_or_404(Login, id=hosp_id)
+
+    # Fetch ambulances from the logged-in hospital
+    ambulances = AmbulanceRegister.objects.filter(hosp_id=hid)
+
+    # Filter out ambulances that already have a location record with complete_status = 0
+    # These ambulances should not be shown
+    ambulances_to_display = []
+
+    for ambulance in ambulances:
+        # Check if the ambulance has a location with complete_status=0
+        location = Location.objects.filter(amb_login_id=ambulance, complete_status=1).first()
+        if not location:  # If no such location exists, show the ambulance
+            ambulances_to_display.append(ambulance)
+    
+    return render(request, 'viewambdata.html', {'data': ambulances_to_display, 'patient': pat_id})
 
 # # def location(request):
 from django.http import JsonResponse
@@ -481,7 +514,8 @@ def save_location(request):
             latitude=latitude,
             longitude=longitude,
             pat_id=p,
-            amb_login_id=amb
+            amb_login_id=amb,
+            complete_status=1
 
         )
         location.save()
@@ -866,5 +900,10 @@ def upload(request):
         form = upload_form()  
 
     return render(request, 'upload.html', {'form': form})
+def complete_status(request,id):
+    appid = get_object_or_404(Location,id = id)
+    appid.complete_status=0
+    appid.save()
+    return redirect('viewtransferedpatients')
 
 #   

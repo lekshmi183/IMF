@@ -67,6 +67,7 @@ urlpatterns = [
      path("store_location/", views.store_location, name="store_location"),
      path("viewalert", views.viewalert, name="viewalert"),
      path("upload", views.upload, name="upload"),
+     path("complete_status/<int:id>/", views.complete_status, name="complete_status"),
 
 
 
