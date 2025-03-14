@@ -70,6 +70,7 @@ urlpatterns = [
      path('track-location/<int:hospital_id>/', views.track_location, name='trackloc'),
      path("store_location/", views.store_location, name="store_location"),
      path("viewalert", views.viewalert, name="viewalert"),
+     path("complete_status/<int:id>/", views.complete_status, name="complete_status"),
 
 
 

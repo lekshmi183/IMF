@@ -25,6 +25,7 @@
                     <!-- Create a link that will open the location in Google Maps -->
                     <a href="https://www.google.com/maps?q={{ location.latitude }},{{ location.longitude }}" target="_blank">View Location on Google Maps</a>
                 </td>
+                <td><a href="{% url 'complete_status' a.id %}">TASK COMPLETED</a></td>
     </tr>
     {% endfor %}
     </table>

@@ -99,6 +99,8 @@ class Location(models.Model):
    current_date = models.DateTimeField(auto_now_add=True)
    pat_id=models.ForeignKey('PatientRegister',on_delete=models.CASCADE,related_name='pat_loginid',null=True)
    amb_login_id=models.ForeignKey('AmbulanceRegister',on_delete=models.CASCADE,related_name='amb_loginid',null=True)
+   complete_status=models.IntegerField(default=0)
+
    def __str__(self):
         return f"Location {self.location} ({self.latitude}, {self.longitude})"
 
@@ -107,6 +109,7 @@ class Transfer(models.Model):
     to_hosp_id=models.ForeignKey('HospitalRegister',on_delete=models.CASCADE,related_name='to_hosp_loginid')
     pat_id=models.ForeignKey('PatientRegister',on_delete=models.CASCADE,related_name='patient_loginid',null=True)
     current_date = models.DateTimeField(auto_now_add=True)
+   
 
 class Notification(models.Model):
     notification=models.CharField(max_length=100)

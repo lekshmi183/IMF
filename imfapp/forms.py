@@ -134,4 +134,5 @@ class notification_form(forms.ModelForm):
         widget={
             'notification':forms.TextInput(attrs={'class':'form-control'})
         }
+        
 
