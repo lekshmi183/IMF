@@ -9,7 +9,15 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def mainindex(request):
-    return render(request,'mainindex.html')
+    a=HospitalRegister.objects.count()
+    print(a)
+    b=PatientRegister.objects.count()
+    print(b)
+    c=DoctorRegister.objects.count()
+    print(c)
+    d=AmbulanceRegister.objects.count()
+    print(d)
+    return render(request,'mainindex.html',{'a':a ,'b':b,'c':c, 'd':d})
 
 def admin(request):
     a=HospitalRegister.objects.count()
@@ -44,7 +52,15 @@ def hosp_reg(request):
 
 
 def hosphome(request):
-    return render(request,'hosphome.html')
+    a=HospitalRegister.objects.count()
+    print(a)
+    b=PatientRegister.objects.count()
+    print(b)
+    c=DoctorRegister.objects.count()
+    print(c)
+    d=AmbulanceRegister.objects.count()
+    print(d)
+    return render(request,'hosphome.html',{'a':a ,'b':b,'c':c, 'd':d})
 
 def loginprocess(request):
     if request.method == 'POST':
@@ -142,7 +158,15 @@ def patient_reg(request):
     return render(request,'patientregister.html',{'form':form,'login':login})
 
 def patienthome(request):
-    return render(request,'patienthome.html')
+    a=HospitalRegister.objects.count()
+    print(a)
+    b=PatientRegister.objects.count()
+    print(b)
+    c=DoctorRegister.objects.count()
+    print(c)
+    d=AmbulanceRegister.objects.count()
+    print(d)
+    return render(request,'patienthome.html',{'a':a ,'b':b,'c':c, 'd':d})
 
 def dochome(request):
     return render(request,'dochome.html')
