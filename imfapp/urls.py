@@ -68,6 +68,18 @@ urlpatterns = [
      path("viewalert", views.viewalert, name="viewalert"),
      path("upload", views.upload, name="upload"),
      path("complete_status/<int:id>/", views.complete_status, name="complete_status"),
+     path('feedback',views.feedback,name='feedback'),
+     path('adminfeedbackview',views.adminfeedbackview,name='adminfeedbackview'),
+     path('reply/<int:id>/',views.reply,name='reply'),
+     path('viewfeedback',views.viewfeedback,name='viewfeedback'),
+     path('editfeedback/<int:id>/',views.editfeedback,name='editfeedback'),
+     path('deletefeedback/<int:id>/',views.deletefeedback,name='deletefeedback'),
+
+
+
+
+
+
 
 
 
