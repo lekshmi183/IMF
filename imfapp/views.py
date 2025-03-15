@@ -69,6 +69,9 @@ def loginprocess(request):
                     elif user.usertype==4:
                         request.session['amb_id']=user.id
                         return redirect('ambhome')
+                    elif user.usertype==0:
+                        request.session['admin_id']=user.id
+                        return redirect('admin')
                 else:
                     messages.error(request,'invalid password')    
             except Login.DoesNotExist:
@@ -129,7 +132,7 @@ def patient_reg(request):
         login=login_form(request.POST)
         if form.is_valid() and login.is_valid():
             a=login.save(commit=False)
-            a.usertype=3
+            a.usertype=1
             a.save()
             b=form.save(commit=False)
             b.login_id=a
@@ -906,4 +909,61 @@ def complete_status(request,id):
     appid.save()
     return redirect('viewtransferedpatients')
 
-#   
+def feedback(request):
+    pat_id=request.session.get('patient_id')
+    login_details = get_object_or_404(PatientRegister, login_id=pat_id)
+    if request.method=='POST': 
+        form1=feedback_form(request.POST)
+        print(form1)
+        if form1.is_valid():
+            b=form1.save(commit=False)
+            b.pat_id=login_details
+            b.save()
+            return redirect('patienthome')
+
+    else:
+        form1=feedback_form()
+    return render(request,'feedback.html',{'form': form1})
+
+def adminfeedbackview(request):
+    view_id=Feedback.objects.all()
+    return render(request,'adminfeedbackview.html',{'data':view_id})
+
+def reply(request,id):
+    feedback_details = get_object_or_404(Feedback,id=id)
+    reply=request.POST.get('reply')
+    if reply is not None:
+        feedback_details.reply=reply
+        feedback_details.save()
+        return redirect('adminfeedbackview')
+    else:
+        return render(request,'reply.html')
+    
+def viewfeedback(request):
+    id=request.session.get('patient_id')
+    hid=get_object_or_404(PatientRegister,login_id=id)
+    feed_id=Feedback.objects.filter(pat_id=hid)
+    print(feed_id)
+    return render(request,'viewfeedback.html',{'data':feed_id})
+
+def editfeedback(request, id):
+    pat_id = request.session.get('patient_id')
+    login = get_object_or_404(PatientRegister, login_id=pat_id)
+    feedback = get_object_or_404(Feedback, id=id, pat_id=login)
+
+    if request.method == 'POST':
+        form = feedback_form(request.POST, instance=feedback)
+        if form.is_valid():
+            form.save()
+            return redirect('viewfeedback')
+    else:
+        form = feedback_form(instance=feedback)
+
+    return render(request, 'editfeedback.html', {'form': form})
+
+
+def deletefeedback(request, id):
+    feedback = get_object_or_404(Feedback, id=id)
+    feedback.delete()
+    return redirect('viewfeedback')
+

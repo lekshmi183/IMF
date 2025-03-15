@@ -122,3 +122,8 @@ class EmergencyNotify(models.Model):
     longitude = models.FloatField() 
     current_date = models.DateTimeField(auto_now_add=True)
 
+
+class Feedback(models.Model):
+    feedback=models.CharField(max_length=100)
+    reply=models.CharField(max_length=100)
+    pat_id=models.ForeignKey('PatientRegister',on_delete=models.CASCADE,related_name='p_loginid',null=True)

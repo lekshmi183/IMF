@@ -1,0 +1,23 @@
+{% extends 'patientheader.html' %}
+{% block content %}
+
+
+<center>
+    <table border="1" class="table table-stripped">
+        <tr>
+            <th>Feedback</th>
+            <th>Reply</th>
+        </tr>
+        {% for a in data %}
+        <tr>
+        <td>{{a.feedback}}</td>
+        <td>{{a.reply}}</td>
+        <td>
+            <a href="{% url 'editfeedback' a.id %}">EDIT</a></td>
+        <td>
+            <a href="{% url 'deletefeedback' a.id %}">DELETE</a></td>
+    </tr>
+        {% endfor %}
+    </table>
+    
+{% endblock %}

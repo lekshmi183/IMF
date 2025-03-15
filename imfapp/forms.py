@@ -140,5 +140,19 @@ class upload_form(forms.ModelForm):
         widget={
             'upload':forms.FileInput(attrs={'class':'form-control'})
         }
+class feedback_form(forms.ModelForm):
+    class Meta:
+        model=Feedback
+        fields=['feedback']
+        widget={
+            'feedback':forms.TextInput(attrs={'class':'form-control'})
+        }
+class reply_form(forms.ModelForm):
+    class Meta:
+        model=Feedback
+        fields=['reply']
+        widget={
+            'reply':forms.TextInput(attrs={'class':'form-control'})
+        }
         
 

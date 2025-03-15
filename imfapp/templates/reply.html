@@ -1,0 +1,27 @@
+{% extends 'hospheader.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Add Notification</title> -->
+</head>
+<body>
+    <center>
+        <form action="" method="POST">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <h3>REPLY</h3>
+                    {% csrf_token %}
+                  <input name="reply" type="text">
+                    <!-- Submit button inside the form -->
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </center>
+</body>
+</html>
+{% endblock %}
