@@ -69,6 +69,9 @@ def loginprocess(request):
                     elif user.usertype==4:
                         request.session['amb_id']=user.id
                         return redirect('ambhome')
+                    elif user.usertype==5:
+                        request.session['pharm_id']=user.id
+                        return redirect('pharmhome')
                     elif user.usertype==0:
                         request.session['admin_id']=user.id
                         return redirect('admin')
@@ -967,3 +970,60 @@ def deletefeedback(request, id):
     feedback.delete()
     return redirect('viewfeedback')
 
+
+def pharm_reg(request):
+    id=request.session.get('hosp_id')
+    hid=get_object_or_404(Login,id=id)
+    print(id)
+    if request.method == 'POST':
+        form = pharm_form(request.POST,request.FILES)
+        login = login_form(request.POST)
+
+        
+        if form.is_valid() and login.is_valid():
+            try:
+                a = login.save(commit=False)
+                a.usertype = 5
+                a.save()
+                
+                b = form.save(commit=False)
+                b.login_id = a
+                b.hosp_id=hid
+                b.save()
+                messages.success(request, "Form successfully submitted")
+                return redirect('hosphome')
+            except Exception as e:
+                messages.error(request, f"Error occurred: {str(e)}")
+                # Optionally log the exception as well for debugging
+        else:
+            messages.error(request, "There were errors in the form. Please check and try again.")
+    else:
+        form = pharm_form()
+        login = login_form()
+    
+    return render(request, 'pharmreg.html', {'form': form, 'login': login})
+
+def pharmhome(request):
+    return render(request,'pharmhome.html')
+
+def view_pharm(request):
+    id=request.session.get('hosp_id')
+    hid=get_object_or_404(Login,id=id)
+    pharm_id=PharmacyRegister.objects.filter(hosp_id=hid)
+    return render(request,'viewpharm.html',{'data':pharm_id})
+
+def pharmproedit(request):
+    userid=request.session.get('pharm_id')
+    login=get_object_or_404(Login,id=userid)
+    pharm_data=get_object_or_404(PharmacyRegister,login_id=userid)
+    if request.method=='POST': 
+        form1=pharm_form(request.POST,instance=pharm_data)
+        form2=login_form(request.POST,instance=login)
+        if form1.is_valid() and form2.is_valid():
+            form1.save()
+            form2.save()
+            return redirect('pharmhome')
+    else:
+        form1=pharm_form(instance=pharm_data)
+        form2=login_form(instance=login)
+    return render(request,'pharmproedit.html',{'form':form1,'login':form2})

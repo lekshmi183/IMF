@@ -127,3 +127,20 @@ class Feedback(models.Model):
     feedback=models.CharField(max_length=100)
     reply=models.CharField(max_length=100)
     pat_id=models.ForeignKey('PatientRegister',on_delete=models.CASCADE,related_name='p_loginid',null=True)
+
+class PharmacyRegister(models.Model):
+   pharmacy_name=models.CharField(max_length=255)
+   pharmacy_contact=models.CharField(max_length=20)
+   hosp_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='pharm_hosp_id')
+   login_id=models.OneToOneField('Login',on_delete=models.CASCADE,related_name='pharm_login_id')
+
+class Medicine(models.Model):
+    med_category=models.CharField(max_length=255)
+    company_name=models.CharField(max_length=255)
+    contents=models.CharField(max_length=255)
+    description=models.CharField(max_length=255)
+    amount=models.CharField(max_length=255)
+    quantity=models.CharField(max_length=255)
+    exp_date = models.DateField()
+    current_date = models.DateTimeField(auto_now_add=True)
+    login_id=models.ForeignKey(Login,on_delete=models.CASCADE,related_name='pharm_login')

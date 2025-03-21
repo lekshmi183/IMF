@@ -154,5 +154,28 @@ class reply_form(forms.ModelForm):
         widget={
             'reply':forms.TextInput(attrs={'class':'form-control'})
         }
+
+class pharm_form(forms.ModelForm):
+    class Meta:
+        model=PharmacyRegister
+        fields=['pharmacy_name','pharmacy_contact']
+        widgets={
+            'pharmacy_name':forms.TextInput(attrs={'class':'form-control'}),
+            'pharmacy_contact':forms.TextInput(attrs={'class':'form-control'})
+        }
+
+class medicine_form(forms.ModelForm):
+    class Meta:
+        model=Medicine
+        fields=['med_category','company_name','contents','description','amount','quantity','exp_date']
+        widgets={
+            'med_category':forms.TextInput(attrs={'class':'form-control'}),
+            'company_name':forms.TextInput(attrs={'class':'form-control'}),
+            'contents':forms.TextInput(attrs={'class':'form-control'}),
+            'description':forms.TextInput(attrs={'class':'form-control'}),
+            'amount':forms.TextInput(attrs={'class':'form-control'}),
+            'quantity':forms.TextInput(attrs={'class':'form-control'}),
+            'exp_date':forms.TextInput(attrs={'class':'form-control'}),
+        }
         
 

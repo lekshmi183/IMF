@@ -74,6 +74,15 @@ urlpatterns = [
      path('viewfeedback',views.viewfeedback,name='viewfeedback'),
      path('editfeedback/<int:id>/',views.editfeedback,name='editfeedback'),
      path('deletefeedback/<int:id>/',views.deletefeedback,name='deletefeedback'),
+     path('pharm_reg',views.pharm_reg,name='pharm_reg'),
+     path('pharmhome',views.pharmhome,name='pharmhome'),
+     path('view_pharm',views.view_pharm,name='view_pharm'),
+     path('pharmproedit',views.pharmproedit,name='pharmproedit'),
+
+
+
+
+
 
 
 

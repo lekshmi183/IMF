@@ -58,66 +58,32 @@
                            <a class="nav-link p-0 text-white" href="index.html">Home<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link p-0 text-white" href="{% url 'hospprofedit' %}">Profile</a>
+                           <a class="nav-link p-0 text-white" href="{% url 'pharmproedit' %}">Profile</a>
                         </li>
-                        <li class="nav-item dropdown pr-lg-0">
-                           <a class="nav-link dropdown-toggle p-0 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Ambulance
-                           </a>
-                           <div class="dropdown-menu p-0" aria-labelledby="navbarDropdown">
-                             <a class="dropdown-item" href="{% url 'amb_reg' %}">Add Ambulance</a>
-                             <a class="dropdown-item" href="{% url 'view_amb' %}">View Ambulance</a>
-                           </div>
-                         </li>
-                        <li class="nav-item dropdown pr-lg-0">
+                        <li class="nav-item">
+                           <a class="nav-link p-0 text-white" href="{% url 'viewappointment' %}">View Appointments</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link p-0 text-white" href="team.html">Team </a>
+                        </li>
+                        <!-- <li class="nav-item dropdown pr-lg-0">
                            <a class="nav-link dropdown-toggle p-0 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                              Doctor
                            </a>
                            <div class="dropdown-menu p-0" aria-labelledby="navbarDropdown">
-                             <a class="dropdown-item" href="{% url 'doc_reg' %}">Add Doctor</a>
-                             <a class="dropdown-item" href="{% url 'view_doc' %}">View Doctor</a>
+                             <a class="dropdown-item" href="{% url 'doc_reg' %}">Add Patient</a>
+                             <a class="dropdown-item" href="{% url 'view_doc' %}">View Patient</a>
                              
                            </div>
-                         </li>
-                         <li class="nav-item dropdown pr-lg-0">
-                           <a class="nav-link dropdown-toggle p-0 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Pharmacy
-                           </a>
-                           <div class="dropdown-menu p-0" aria-labelledby="navbarDropdown">
-                             <a class="dropdown-item" href="{% url 'pharm_reg' %}">Add Pharmacy</a>
-                             <a class="dropdown-item" href="{% url 'view_pharm' %}">View Pharmacy</a>
-                             
-                           </div>
-                         </li>
-                         <li class="nav-item dropdown pr-lg-0">
-                           <a class="nav-link dropdown-toggle p-0 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Shelter Transfer
-                           </a>
-                           <div class="dropdown-menu p-0" aria-labelledby="navbarDropdown">
-                             <a class="dropdown-item" href="{% url 'viewtransferpatients' %}">Add Transfer</a>
-                             <a class="dropdown-item" href="{% url 'viewhosptransfer' %}">View Transfer</a>
-                           </div>
-                         </li>
-                         <li class="nav-item dropdown pr-lg-0">
-                           <a class="nav-link dropdown-toggle p-0 text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Hospital Transfer
-                           </a>
-                           <div class="dropdown-menu p-0" aria-labelledby="navbarDropdown">
-                             <a class="dropdown-item" href="{% url 'viewpatientdata' %}">Add Transfer</a>
-                             <a class="dropdown-item" href="{% url 'viewtransferdetails' %}">View Transfer</a>
-                           </div>
-                         </li>
+                         </li> -->
                          <li class="nav-item">
-                           <a class="nav-link p-0 text-white" href="{% url 'notification' %}">Notification</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link p-0 text-white" href="{% url 'viewalert' %}">View Alert</a>
+                           <a class="nav-link p-0 text-white" href="contact.html"> Contact </a>
                         </li>
                      </ul>
-                     <!-- <a href="tel:+12345678" class="navbar-btn text-white">
+                     <a href="tel:+12345678" class="navbar-btn text-white">
                      <i class="fas fa-phone-volume"></i>
                      +1 234 56 78
-                     </a> -->
+                     </a>
                   </div>
                </nav>
                <!-- navbar-end -->

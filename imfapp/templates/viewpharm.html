@@ -1,0 +1,24 @@
+{% extends 'hospheader.html' %}
+{% block content %}
+
+
+<center>
+    <table border="1" class="table table-stripped">
+        <tr>
+            <th>Pharmacy Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+
+        </tr>
+        {% for a in data %}
+        <tr>
+        <td>{{a.pharmacy_name}}</td>
+        <td>{{a.pharmacy_contact}}</td>
+        <td>{{a.login_id.email}}</td>
+        <!-- <td>
+            <a href="{% url 'consultation_fee' a.id %}">ADD CONSULTATION FEE</a></td> -->
+    </tr>
+    {% endfor %}
+    </table>
+    
+{% endblock %}
