@@ -125,7 +125,7 @@ class EmergencyNotify(models.Model):
 
 class Feedback(models.Model):
     feedback=models.CharField(max_length=100)
-    reply=models.CharField(max_length=100)
+    reply = models.CharField(max_length=100, null=True)
     pat_id=models.ForeignKey('PatientRegister',on_delete=models.CASCADE,related_name='p_loginid',null=True)
 
 class PharmacyRegister(models.Model):

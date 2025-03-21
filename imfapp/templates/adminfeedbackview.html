@@ -423,18 +423,24 @@
                                                 <th>Feedback</th>
                                                 <th>Reply</th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for a in data %}
-                                            <tr>
-                                            <td>{{a.feedback}}</td>
-                                            {% if a.reply == 0 %}
-                                            <td><a class="btn btn-warning" href="{% url 'reply' a.id %}">REPLY</a></td>
-                                            {% else %}
-                                            <td>REPLIED</td>
-                                            {% endif %}
-                                        </tr>
-                                        {% endfor %}
+                                            </thead>
+                                            <tbody>
+                                                {% for a in data %}
+                                                <tr>
+                                                    <td>{{ a.feedback }}</td>
+                                                    <td>
+                                                        {% if a.reply %}
+                                                            <!-- If reply exists, show 'Replied' -->
+                                                            <span class="btn btn-success">Replied</span>
+                                                        {% else %}
+                                                            <!-- Otherwise, show the 'Reply' button -->
+                                                            <a class="btn btn-warning" href="{% url 'reply' a.id %}">REPLY</a>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                            
                                             <!-- <tr>
                                                 <td>Garrett Winters</td>
                                                 <td>Accountant</td>
