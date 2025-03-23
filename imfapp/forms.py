@@ -120,13 +120,13 @@ class amb_login_form(forms.ModelForm):
         model=Login
         fields=['email']
         
-class prescription_form(forms.ModelForm):
-    class Meta:
-        model=Appointment
-        fields=['prescription']
-        widget={
-            'prescription':forms.TextInput(attrs={'class':'form-control'})
-        }
+# class prescription_form(forms.ModelForm):
+#     class Meta:
+#         model=Appointment
+#         fields=['prescription']
+#         widget={
+#             'prescription':forms.TextInput(attrs={'class':'form-control'})
+#         }
 class notification_form(forms.ModelForm):
     class Meta:
         model=Notification
@@ -167,7 +167,7 @@ class pharm_form(forms.ModelForm):
 class medicine_form(forms.ModelForm):
     class Meta:
         model=Medicine
-        fields=['med_category','company_name','contents','description','amount','quantity','exp_date']
+        fields=['med_category','company_name','contents','description','amount','quantity']
         widgets={
             'med_category':forms.TextInput(attrs={'class':'form-control'}),
             'company_name':forms.TextInput(attrs={'class':'form-control'}),
@@ -175,7 +175,6 @@ class medicine_form(forms.ModelForm):
             'description':forms.TextInput(attrs={'class':'form-control'}),
             'amount':forms.TextInput(attrs={'class':'form-control'}),
             'quantity':forms.TextInput(attrs={'class':'form-control'}),
-            'exp_date':forms.TextInput(attrs={'class':'form-control'}),
         }
         
 

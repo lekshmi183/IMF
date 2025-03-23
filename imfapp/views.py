@@ -571,7 +571,7 @@ def viewtransferedpatients(request):
 def add_prescription(request,id):
     appid = get_object_or_404(Appointment,id=id)
     if request.method=='POST': 
-        form1=prescription_form(request.POST)
+        form1=medicine_form(request.POST)
         print(form1)
         if form1.is_valid():
             b=form1.cleaned_data['prescription']
@@ -582,8 +582,15 @@ def add_prescription(request,id):
             return redirect('viewappointment')
 
     else:
-        form1=prescription_form()
+        form1=medicine_form()
     return render(request,'addprescription.html',{'form': form1})   
+
+
+def view_pre(request):
+    doc_id=request.session.get('doc_id')
+    nid=get_object_or_404(DoctorRegister,login_id=doc_id)
+    med_id=Medicine.objects.filter(login_id_id=nid.login_id)
+    return render(request,'viewmedicine.html',{'data':med_id})
 
 def editprescription(request,id):
 
@@ -697,33 +704,39 @@ def transfer_store(request, hid, pat_id):
     
     return redirect('hosphome')
 
-def add_notification(request):
-    hosp_id=request.session.get('hosp_id')
-    login_details = get_object_or_404(HospitalRegister, login_id=hosp_id)
-    if request.method=='POST': 
-        form1=notification_form(request.POST)
-        print(form1)
-        if form1.is_valid():
-            b=form1.save(commit=False)
-            b.hosp_id=login_details
-            b.save()
-            return redirect('hosphome')
+# def add_notification(request):
+#     hosp_id=request.session.get('hosp_id')
+#     login_details = get_object_or_404(HospitalRegister, login_id=hosp_id)
+#     if request.method=='POST': 
+#         form1=notification_form(request.POST)
+#         print(form1)
+#         if form1.is_valid():
+#             b=form1.save(commit=False)
+#             b.hosp_id=login_details
+#             b.save()
+#             return redirect('hosphome')
 
-    else:
-        form1=notification_form()
-    return render(request,'notification.html',{'form': form1}) 
+#     else:
+#         form1=notification_form()
+#     return render(request,'notification.html',{'form': form1}) 
 
-def view_notification(request):
-    hosp_id=request.session.get('hosp_id')
-    nid=get_object_or_404(HospitalRegister,id=hosp_id)
-    notification_id=Notification.objects.filter(hosp_id=nid)
-    return render(request,'viewnotification.html',{'data':notification_id})
+# def view_notification(request):
+#     hosp_id=request.session.get('hosp_id')
+#     nid=get_object_or_404(HospitalRegister,id=hosp_id)
+#     notification_id=Notification.objects.filter(hosp_id=nid)
+#     return render(request,'viewnotification.html',{'data':notification_id})
 
 def viewtransferdetails(request):
     hosp_id = request.session.get('hosp_id')
     hid=get_object_or_404(HospitalRegister,id=hosp_id)
-    data_id=Transfer.objects.filter(to_hosp_id=hid)
+    data_id=Transfer.objects.filter(from_hosp_id=hid)
     return render(request,'viewtransferdetails.html',{'data':data_id})
+
+def toviewtransferdetails(request):
+    hosp_id = request.session.get('hosp_id')
+    hid=get_object_or_404(HospitalRegister,login_id=hosp_id)
+    data_id=Transfer.objects.filter(to_hosp_id=hid)
+    return render(request,'toviewtransferdetails.html',{'data':data_id})
 
 # def viewrecords(request):
 #     hosp_id=request.session.get('hosp_id')
@@ -1051,3 +1064,54 @@ def pharmproedit(request):
         form1=pharm_form(instance=pharm_data)
         form2=login_form(instance=login)
     return render(request,'pharmproedit.html',{'form':form1,'login':form2})
+
+def add_med(request):
+    pharm_id = request.session.get('pharm_id')
+    
+    if not pharm_id:
+        return redirect('some_error_page')  
+
+    login_details = get_object_or_404(PharmacyRegister, login_id_id=pharm_id)
+    
+    if request.method == 'POST':
+        form1 = medicine_form(request.POST)
+        if form1.is_valid():
+            b = form1.save(commit=False)
+            login_instance = login_details.login_id  
+            b.login_id_id = login_instance  
+            b.save()
+            return redirect('pharmhome')  
+    else:
+        form1 = medicine_form()  
+
+    return render(request, 'addmedicine.html', {'form': form1})
+
+def view_med(request):
+    pharm_id=request.session.get('pharm_id')
+    nid=get_object_or_404(PharmacyRegister,login_id=pharm_id)
+    med_id=Medicine.objects.filter(login_id_id=nid.login_id)
+    return render(request,'viewmedicine.html',{'data':med_id})
+
+def editmed(request,id):
+
+    appid = get_object_or_404(Medicine, id=id )
+
+    if request.method == 'POST':
+        form1= medicine_form(request.POST, instance=appid)
+        if form1.is_valid():
+            form1.save()
+            return redirect('view_med')
+    else:
+        form1= medicine_form(instance=appid)
+    
+    return render(request,'editmed.html',{'form': form1})
+
+
+def delete_med(request,id):
+    medicine = get_object_or_404(Medicine,id=id)
+    medicine.delete()
+    return redirect('view_med') 
+
+
+
+

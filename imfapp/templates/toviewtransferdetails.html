@@ -26,7 +26,7 @@
             {% if data %}
                 {% for a in data %}
                     <tr>
-                        <td>{{a.to_hosp_id.hosp_name}}</td>
+                        <td>{{a.from_hosp_id.hosp_name}}</td>
                         <td>{{ a.pat_id.patient_name }}</td>
                         <td>{{ a.pat_id.address }}</td>
                         <td>{{ a.pat_id.gender }}</td>

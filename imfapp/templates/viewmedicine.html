@@ -23,7 +23,10 @@
         <td>{{b.amount}}</td>
         <td>{{b.quantity}}</td>
         <td>
-            <a href="">ADD</a>
+            <a href="{% url 'editmed' b.id %}">EDIT</a>
+        </td>
+        <td>
+            <a href="{% url 'delete_med' b.id %}">DELETE</a>
         </td>
     </tr>
     {% endfor %}

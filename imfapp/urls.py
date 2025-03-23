@@ -52,12 +52,13 @@ urlpatterns = [
      path('cancel/<int:id>/',views.cancel,name='cancel'),
      path('approve/<int:id>/',views.approve,name='approve'),
      path('reject/<int:id>/',views.reject,name='reject'),
-     path('notification',views.add_notification,name='notification'),
-     path('viewnotification',views.view_notification,name='viewnotification'),
+     # path('notification',views.add_notification,name='notification'),
+     # path('viewnotification',views.view_notification,name='viewnotification'),
      path('viewpatientdata',views.viewpatientdata,name='viewpatientdata'),
      path('viewhospdata/<int:id>/',views.viewhospdata,name='viewhospdata'),
      path('transfer_store/<int:hid>/<int:pat_id>/',views.transfer_store,name='transfer_store'),
      path('viewtransferdetails',views.viewtransferdetails,name='viewtransferdetails'),
+     path('toviewtransferdetails',views.toviewtransferdetails,name='toviewtransferdetails'),
      path('viewrecords/<int:id>',views.viewrecords,name='viewrecords'),
      path('vidconference/<int:id>',views.vidconference,name='vidconference'),
      path('save-appointment-url/<int:id>/', views.save_appointment_url, name='save_appointment_url'),    
@@ -78,6 +79,14 @@ urlpatterns = [
      path('pharmhome',views.pharmhome,name='pharmhome'),
      path('view_pharm',views.view_pharm,name='view_pharm'),
      path('pharmproedit',views.pharmproedit,name='pharmproedit'),
+     path('add_med',views.add_med,name='add_med'),
+     path('view_med',views.view_med,name='view_med'),
+     path('editmed/<int:id>/',views.editmed,name='editmed'),
+     path('delete_med/<int:id>/',views.delete_med,name='delete_med'),
+
+
+
+
 
 
 

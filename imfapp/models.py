@@ -141,6 +141,5 @@ class Medicine(models.Model):
     description=models.CharField(max_length=255)
     amount=models.CharField(max_length=255)
     quantity=models.CharField(max_length=255)
-    exp_date = models.DateField()
     current_date = models.DateTimeField(auto_now_add=True)
-    login_id=models.ForeignKey(Login,on_delete=models.CASCADE,related_name='pharm_login')
+    login_id_id=models.ForeignKey('Login',on_delete=models.CASCADE,related_name='pharm_login')
